@@ -214,6 +214,8 @@
       margin-bottom: 60px;
       align-self: flex-start;
       margin-left: 0;
+      width: 100%;
+      max-width: 900px;
     }
 
     .hero-content {
@@ -522,328 +524,6 @@
 
       .step-number {
         font-size: 2.5rem;
-      }
-    }
-
-    /* Section 04: Results */
-    .results {
-      padding: 120px 40px;
-      background-color: var(--dark-gray);
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .results-header {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 80px;
-    }
-
-    .results-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
-      margin-bottom: 80px;
-    }
-
-    .stat-block {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 4.5rem;
-      color: var(--amber);
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 500;
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 14px;
-      color: var(--warm-white);
-      line-height: 1.5;
-    }
-
-    .results-quote {
-      font-size: 20px;
-      font-style: italic;
-      text-align: center;
-      color: var(--warm-white);
-      opacity: 0.8;
-      border-left: 3px solid var(--amber);
-      padding-left: 32px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 768px) {
-      .results {
-        padding: 80px 24px;
-      }
-
-      .results-stats {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-      }
-
-      .results-quote {
-        font-size: 16px;
-        padding-left: 20px;
-      }
-    }
-
-    /* Section 05: Who This Is For */
-    .who-is-this-for {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .who-section-header {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 80px;
-    }
-
-    .who-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-    }
-
-    .who-column h3 {
-      font-size: 16px;
-      margin-bottom: 32px;
-      letter-spacing: 0.1em;
-      color: var(--amber);
-    }
-
-    .who-column ul {
-      list-style: none;
-    }
-
-    .who-column li {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--concrete-gray);
-      font-size: 14px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .who-column li::before {
-      content: '✓';
-      color: var(--amber);
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-
-    .not-for .who-column li::before {
-      content: '✕';
-      color: var(--error-red);
-    }
-
-    @media (max-width: 768px) {
-      .who-is-this-for {
-        padding: 80px 24px;
-      }
-
-      .who-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .who-section-header {
-        flex-direction: column;
-      }
-    }
-
-    /* Section 06: Pricing */
-    .pricing {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .pricing-header {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 80px;
-    }
-
-    .pricing-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .pricing-card {
-      background-color: var(--dark-gray);
-      border: 1px solid var(--concrete-gray);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s var(--ease-smooth);
-      opacity: 0;
-      animation: fadeUpIn 0.6s var(--ease-smooth) forwards;
-    }
-
-    .pricing-card:nth-child(2) {
-      border: 2px solid var(--amber);
-      transform: scale(1.02);
-      animation-delay: 0.2s;
-    }
-
-    .pricing-card:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-
-    .pricing-card:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    .pricing-label {
-      font-size: 12px;
-      color: var(--warm-white);
-      opacity: 0.6;
-      margin-bottom: 16px;
-      letter-spacing: 0.1em;
-    }
-
-    .pricing-amount {
-      font-size: 2.5rem;
-      color: var(--amber);
-      margin-bottom: 32px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 500;
-    }
-
-    .pricing-card h3 {
-      font-size: 18px;
-      margin-bottom: 24px;
-      letter-spacing: 0.1em;
-    }
-
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 40px;
-      flex-grow: 1;
-    }
-
-    .pricing-features li {
-      font-size: 13px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--concrete-gray);
-      color: var(--warm-white);
-      opacity: 0.7;
-    }
-
-    .pricing-card .btn-primary {
-      width: 100%;
-      justify-content: center;
-    }
-
-    @media (max-width: 768px) {
-      .pricing {
-        padding: 80px 24px;
-      }
-
-      .pricing-cards {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .pricing-card:nth-child(2) {
-        transform: scale(1);
-      }
-
-      .pricing-header {
-        flex-direction: column;
-      }
-    }
-
-    /* Section 07: FAQ */
-    .faq {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .faq-header {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 80px;
-    }
-
-    .faq-list {
-      max-width: 900px;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--concrete-gray);
-      padding: 24px 0;
-    }
-
-    .faq-question {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s var(--ease-smooth);
-    }
-
-    .faq-question:hover {
-      color: var(--amber);
-    }
-
-    .faq-question h3 {
-      font-size: 16px;
-      letter-spacing: 0.05em;
-    }
-
-    .faq-toggle {
-      font-size: 24px;
-      color: var(--amber);
-      transition: transform 0.3s var(--ease-smooth);
-      flex-shrink: 0;
-    }
-
-    .faq-toggle.open {
-      transform: rotate(180deg);
-    }
-
-    .faq-answer {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.3s var(--ease-smooth);
-      margin-top: 0;
-    }
-
-    .faq-answer.open {
-      max-height: 500px;
-      margin-top: 16px;
-    }
-
-    .faq-answer p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--warm-white);
-      opacity: 0.8;
-    }
-
-    @media (max-width: 768px) {
-      .faq {
-        padding: 80px 24px;
-      }
-
-      .faq-header {
-        flex-direction: column;
       }
     }
 
@@ -1298,9 +978,7 @@
         </div>
       </div>
 
-      <div class="hero-terminal" id="terminal">
-        <span class="terminal-line"><span id="terminalText"></span><span class="cursor"></span></span>
-      </div>
+      <div class="hero-terminal" id="terminal"></div>
 
       <div class="scroll-indicator">
         <div class="scroll-dot"></div>
@@ -1341,7 +1019,7 @@
     </section>
 
     <!-- Section 03: How It Works -->
-    <section class="how-it-works">
+    <section class="how-it-works" id="howItWorks">
       <div class="container">
         <div class="section-header">
           <div class="section-label">
@@ -1371,188 +1049,6 @@
     </section>
 
     <!-- Section 04: Results -->
-    <section class="results">
-      <div class="container">
-        <div class="results-header">
-          <div class="section-label">
-            <div class="section-number">04</div>
-            <p class="section-intro">What success looks like.</p>
-          </div>
-        </div>
-
-        <div class="results-stats">
-          <div class="stat-block">
-            <div class="stat-number" data-target="847">0</div>
-            <p class="stat-label">Manual hours eliminated per client, per month (avg)</p>
-          </div>
-          <div class="stat-block">
-            <div class="stat-number" data-target="14">0</div>
-            <p class="stat-label">Average days from kickoff to first workflow in production</p>
-          </div>
-          <div class="stat-block">
-            <div class="stat-number" data-target="3.2">0</div>
-            <p class="stat-label">Average output increase for content clients in 60 days</p>
-          </div>
-        </div>
-
-        <blockquote class="results-quote">"Most agencies talk about AI. We architect it. The difference shows up in your ops within two weeks."</blockquote>
-      </div>
-    </section>
-
-    <!-- Section 05: Who This Is For -->
-    <section class="who-is-this-for">
-      <div class="container">
-        <div class="who-section-header">
-          <div class="section-label">
-            <div class="section-number">05</div>
-            <p class="section-intro">Fit matters.</p>
-          </div>
-        </div>
-
-        <div class="who-grid">
-          <div class="who-column">
-            <h3>WHO THIS IS FOR</h3>
-            <ul>
-              <li>Founders who have outgrown manual processes but aren't ready to hire</li>
-              <li>Operators running content, lead gen, or client delivery at scale</li>
-              <li>Teams that have tried AI tools but never had them properly integrated</li>
-              <li>Businesses paying contractors to do work that should be automated</li>
-            </ul>
-          </div>
-          <div class="who-column not-for">
-            <h3>WHO THIS IS NOT FOR</h3>
-            <ul>
-              <li>Companies that need a chatbot demo or a "strategy deck"</li>
-              <li>Teams that want to evaluate AI for 6 months before committing</li>
-              <li>Anyone looking for the cheapest possible implementation</li>
-              <li>Organizations without clear manual processes to eliminate</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 06: Pricing -->
-    <section class="pricing">
-      <div class="container">
-        <div class="pricing-header">
-          <div class="section-label">
-            <div class="section-number">06</div>
-            <p class="section-intro">Systems that fit your stage.</p>
-          </div>
-        </div>
-
-        <div class="pricing-cards">
-          <div class="pricing-card">
-            <p class="pricing-label">ONE-TIME BUILD</p>
-            <div class="pricing-amount">$1,500</div>
-            <h3>STARTER PIPELINE</h3>
-            <ul class="pricing-features">
-              <li>Single workflow automation</li>
-              <li>1 AI integration</li>
-              <li>Full documentation</li>
-              <li>2-week support window</li>
-            </ul>
-            <button class="btn-primary">GET STARTED →</button>
-          </div>
-
-          <div class="pricing-card">
-            <p class="pricing-label">ONE-TIME BUILD</p>
-            <div class="pricing-amount">$3,500</div>
-            <h3>GROWTH SYSTEM</h3>
-            <ul class="pricing-features">
-              <li>3 interconnected workflows</li>
-              <li>AI agent integration</li>
-              <li>CRM/email connection</li>
-              <li>Full documentation</li>
-              <li>30-day support window</li>
-            </ul>
-            <button class="btn-primary">GET STARTED →</button>
-          </div>
-
-          <div class="pricing-card">
-            <p class="pricing-label">CUSTOM PRICING</p>
-            <div class="pricing-amount">TBD</div>
-            <h3>FULL INFRASTRUCTURE</h3>
-            <ul class="pricing-features">
-              <li>Complete operations audit</li>
-              <li>Unlimited workflows</li>
-              <li>AI model orchestration</li>
-              <li>Custom infrastructure</li>
-              <li>Ongoing retainer available</li>
-              <li>Dedicated support</li>
-            </ul>
-            <button class="btn-primary">GET STARTED →</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 07: FAQ -->
-    <section class="faq">
-      <div class="container">
-        <div class="faq-header">
-          <div class="section-label">
-            <div class="section-number">07</div>
-            <p class="section-intro">Questions answered.</p>
-          </div>
-        </div>
-
-        <div class="faq-list">
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <h3>What tools and platforms do you use?</h3>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              <p>We primarily build in n8n for workflow orchestration, combined with custom APIs, popular SaaS integrations (CRM, email, Slack, etc.), and LLM providers like OpenAI or Anthropic. Every system is built to your existing tech stack.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <h3>Do I need technical knowledge to manage the systems after handoff?</h3>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              <p>No. We build systems your team can monitor and adjust without code. We provide comprehensive documentation and 30-day support during the transition so you're not alone.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <h3>How long does a typical project take?</h3>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              <p>From kickoff to first workflow live: 10-14 days. Full system deployment depends on complexity, but we have systems running in production within 2-3 weeks on average.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <h3>Can you automate systems inside tools I already use (CRM, email, Slack)?</h3>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              <p>Yes. If it has an API or webhook, we can integrate it. Most business tools (HubSpot, Salesforce, Pipedrive, Zapier, etc.) integrate seamlessly into our workflows.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <h3>What happens if something breaks after the project ends?</h3>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              <p>You own the system and have full access to modify and fix it. Optional ongoing support packages available. If you want us to handle changes, we offer retainer-based management.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 04: Results -->
     <section class="results-section" id="resultsSection">
       <div class="container">
         <div class="section-label" style="margin-bottom: 80px;">
@@ -1570,7 +1066,7 @@
             <p class="stat-description">Days from kickoff to first workflow in production</p>
           </div>
           <div class="stat-item">
-            <div class="stat-counter" data-target="3.2">0</div>
+            <div class="stat-counter" data-target="3.2" data-suffix="×">0</div>
             <p class="stat-description">Average output increase for content clients in 60 days</p>
           </div>
         </div>
@@ -1800,22 +1296,47 @@
         '> STATUS: RUNNING ✓'
       ];
 
+      const terminal = document.getElementById('terminal');
+      terminal.innerHTML = '';
       let lineIndex = 0;
       let charIndex = 0;
-      const terminalText = document.getElementById('terminalText');
+
+      function getCurrentLine() {
+        return terminal.querySelector('.terminal-active');
+      }
+
+      function addNewLine() {
+        const line = document.createElement('div');
+        line.className = 'terminal-active';
+        line.style.color = 'var(--terminal-green)';
+        line.style.fontFamily = "'IBM Plex Mono', monospace";
+        line.style.fontSize = '12px';
+        line.style.lineHeight = '1.8';
+        line.style.minHeight = '1.8em';
+        terminal.appendChild(line);
+      }
 
       function type() {
-        if (lineIndex < lines.length) {
-          if (charIndex < lines[lineIndex].length) {
-            terminalText.textContent += lines[lineIndex][charIndex];
-            charIndex++;
-            setTimeout(type, 30);
-          } else {
-            terminalText.textContent += '\n';
-            lineIndex++;
-            charIndex = 0;
-            setTimeout(type, 500);
-          }
+        if (lineIndex >= lines.length) {
+          const activeLine = getCurrentLine();
+          if (activeLine) activeLine.classList.remove('terminal-active');
+          return;
+        }
+
+        if (charIndex === 0) addNewLine();
+
+        const activeLine = getCurrentLine();
+        const currentLine = lines[lineIndex];
+
+        if (charIndex < currentLine.length) {
+          activeLine.textContent = currentLine.substring(0, charIndex + 1);
+          charIndex++;
+          setTimeout(type, 30);
+        } else {
+          activeLine.classList.remove('terminal-active');
+          lineIndex++;
+          charIndex = 0;
+          setTimeout(type, 400);
         }
       }
 
@@ -1836,20 +1357,24 @@
     });
 
     function animateCounter(element) {
-      const target = parseInt(element.getAttribute('data-target'));
+      const target = parseFloat(element.getAttribute('data-target'));
+      const isDecimal = !Number.isInteger(target);
+      const suffix = element.getAttribute('data-suffix') || '';
       let current = 0;
-      const increment = target / 50;
-      const isDecimal = target % 1 !== 0;
+      const duration = 1500;
+      const steps = 60;
+      const increment = target / steps;
+      const interval = duration / steps;
 
       const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-          element.textContent = isDecimal ? target.toFixed(1) : target;
+          element.textContent = (isDecimal ? target.toFixed(1) : target) + suffix;
           clearInterval(timer);
         } else {
-          element.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+          element.textContent = (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
         }
-      }, 20);
+      }, interval);
     }
 
     const observerOptions = {
@@ -1885,21 +1410,6 @@
     document.querySelectorAll('.service-card').forEach(card => {
       cardsObserver.observe(card);
     });
-
-    function toggleFaq(element) {
-      const answer = element.nextElementSibling;
-      const toggle = element.querySelector('.faq-toggle');
-
-      document.querySelectorAll('.faq-answer').forEach(ans => {
-        if (ans !== answer) {
-          ans.classList.remove('open');
-          ans.previousElementSibling.querySelector('.faq-toggle').classList.remove('open');
-        }
-      });
-
-      answer.classList.toggle('open');
-      toggle.classList.toggle('open');
-    }
 
     function toggleFaqItem(element) {
       const answer = element.nextElementSibling;
