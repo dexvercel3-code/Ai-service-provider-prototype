@@ -173,15 +173,39 @@
           <p class="section-intro">Most agencies deliver a slide deck. We deliver a systems diagram and the API keys to run it.</p>
         </div>
 
-        <!-- Mini Flowchart Example -->
-        <div class="mini-flowchart" aria-hidden="true">
-          <div class="flow-box">CLIENT INTAKE</div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box" style="border-color: var(--amber);">AI CLASSIFIER</div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box">CRM ROUTING</div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box" style="background: rgba(245, 166, 35, 0.1);">EMAIL SEQUENCE</div>
+        <div class="mini-flowchart">
+          <div class="flow-step">
+            <div class="flow-step-number">01</div>
+            <div class="flow-step-box">CLIENT INTAKE</div>
+            <div class="flow-step-label">Raw lead data enters the system</div>
+          </div>
+          <div class="flow-connector">
+            <div class="flow-connector-line"></div>
+            <div class="flow-connector-arrow">→</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-number">02</div>
+            <div class="flow-step-box highlight">AI CLASSIFIER</div>
+            <div class="flow-step-label">LLM scores and categorizes intent</div>
+          </div>
+          <div class="flow-connector">
+            <div class="flow-connector-line"></div>
+            <div class="flow-connector-arrow">→</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-number">03</div>
+            <div class="flow-step-box">CRM ROUTING</div>
+            <div class="flow-step-label">Contact assigned and tagged automatically</div>
+          </div>
+          <div class="flow-connector">
+            <div class="flow-connector-line"></div>
+            <div class="flow-connector-arrow">→</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-number">04</div>
+            <div class="flow-step-box">EMAIL SEQUENCE</div>
+            <div class="flow-step-label">Personalized drip fires within 60 seconds</div>
+          </div>
         </div>
 
         <div class="timeline">
