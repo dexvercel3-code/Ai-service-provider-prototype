@@ -1000,24 +1000,32 @@ footer {
 /* Tool Logos Strip */
 .tool-logos-strip {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 60px;
-  opacity: 0.3;
-  filter: grayscale(1);
+  gap: 48px;
   margin-top: 60px;
-  transition: opacity 0.3s;
+  padding-top: 40px;
+  border-top: 1px solid var(--concrete-gray);
+  flex-wrap: wrap;
 }
 
-.tool-logos-strip:hover {
-  opacity: 0.6;
+.tool-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.45;
+  filter: grayscale(100%) brightness(1.8);
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
-.tool-logo {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.2em;
+.tool-logo-item:hover {
+  opacity: 0.9;
+  filter: grayscale(0%) brightness(1);
+}
+
+.tool-logo-item svg {
+  height: 28px;
+  width: auto;
 }
 
 /* Flowchart */
