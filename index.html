@@ -3,982 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI automation and infrastructure systems built for enterprises. We eliminate manual processes and deploy working systems in weeks, not months.">
-  <meta name="keywords" content="AI automation, n8n workflows, infrastructure, enterprise automation">
-  <title>Cascade Systems - AI Automation & Infrastructure</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --near-black: #0A0A0A;
-      --amber: #F5A623;
-      --warm-white: #E8E2D9;
-      --dark-gray: #1C1C1C;
-      --concrete-gray: #2A2A2A;
-      --terminal-green: #00FF87;
-      --error-red: #D64545;
-      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'IBM Plex Mono', monospace;
-      background-color: var(--near-black);
-      color: var(--warm-white);
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='1'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    main {
-      position: relative;
-      z-index: 2;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Barlow Condensed', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-
-    a {
-      color: var(--amber);
-      text-decoration: none;
-      transition: color 0.3s var(--ease-smooth);
-    }
-
-    a:hover {
-      color: var(--warm-white);
-    }
-
-    button {
-      border: none;
-      cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      transition: all 0.3s var(--ease-smooth);
-    }
-
-    .btn-primary {
-      background-color: var(--amber);
-      color: var(--near-black);
-      padding: 16px 32px;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      border: 1px solid var(--amber);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--warm-white);
-      color: var(--near-black);
-      border-color: var(--warm-white);
-    }
-
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--amber);
-      padding: 16px 32px;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      border: 1px solid var(--amber);
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--amber);
-      color: var(--near-black);
-    }
-
-    .section-number {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 4vw;
-      color: var(--amber);
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      line-height: 1;
-    }
-
-    .horizontal-rule {
-      height: 1px;
-      background-color: var(--concrete-gray);
-      margin: 2rem 0;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 24px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 16px;
-      }
-    }
-
-    /* Header & Navigation */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(10, 10, 10, 0.95);
-      border-bottom: 1px solid var(--concrete-gray);
-      padding: 20px 40px;
-      z-index: 100;
-      opacity: 0;
-      transform: translateY(-100%);
-      transition: opacity 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth);
-    }
-
-    header.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .header-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--amber);
-    }
-
-    @media (max-width: 480px) {
-      header {
-        padding: 16px 20px;
-      }
-
-      .logo {
-        font-size: 14px;
-      }
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 160px 40px 80px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .hero-section-number {
-      position: relative;
-      font-size: 1.5rem;
-      color: var(--amber);
-      font-family: 'IBM Plex Mono', monospace;
-      letter-spacing: 0.3em;
-      margin-bottom: 60px;
-      align-self: flex-start;
-      margin-left: 0;
-      width: 100%;
-      max-width: 900px;
-    }
-
-    .hero-content {
-      text-align: center;
-      max-width: 900px;
-      margin-bottom: 120px;
-      width: 100%;
-    }
-
-    .hero-headline {
-      font-size: clamp(2.5rem, 9vw, 8rem);
-      line-height: 1.1;
-      margin-bottom: 48px;
-      color: var(--warm-white);
-      letter-spacing: 0.03em;
-    }
-
-    .hero-subheadline {
-      font-size: 18px;
-      color: var(--warm-white);
-      opacity: 0.6;
-      margin-bottom: 64px;
-      line-height: 1.6;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 80px;
-    }
-
-    .hero-terminal {
-      position: relative;
-      background-color: var(--dark-gray);
-      border: 1px solid var(--concrete-gray);
-      padding: 24px;
-      width: 100%;
-      max-width: 450px;
-      font-size: 12px;
-      font-family: 'IBM Plex Mono', monospace;
-      color: var(--terminal-green);
-      line-height: 1.8;
-      overflow: hidden;
-      height: 180px;
-      margin-top: 40px;
-    }
-
-    .terminal-line {
-      display: block;
-      height: 1.8em;
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 8px;
-      height: 1em;
-      background-color: var(--terminal-green);
-      margin-left: 4px;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      color: var(--warm-white);
-      opacity: 0.5;
-    }
-
-    .scroll-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--amber);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 120px 24px 80px 24px;
-        min-height: auto;
-      }
-
-      .hero-section-number {
-        font-size: 1.2rem;
-        margin-bottom: 40px;
-      }
-
-      .hero-headline {
-        font-size: clamp(1.8rem, 7vw, 2.5rem);
-        margin-bottom: 32px;
-      }
-
-      .hero-buttons {
-        gap: 12px;
-        margin-bottom: 60px;
-      }
-
-      .hero-terminal {
-        max-width: 100%;
-        height: 160px;
-      }
-
-      .scroll-indicator {
-        bottom: 20px;
-      }
-    }
-
-    /* Section 02: What We Build */
-    .what-we-build {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .section-header {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 60px;
-      margin-bottom: 80px;
-    }
-
-    .section-label {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-    }
-
-    .section-label .section-number {
-      flex-shrink: 0;
-      font-size: 4vw;
-    }
-
-    .section-intro {
-      font-size: 18px;
-      line-height: 1.6;
-      color: var(--warm-white);
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-
-    .service-card {
-      background-color: var(--dark-gray);
-      border: 1px solid var(--concrete-gray);
-      padding: 32px;
-      transition: all 0.3s var(--ease-smooth);
-      opacity: 0;
-      animation: fadeUpIn 0.6s var(--ease-smooth) forwards;
-    }
-
-    @keyframes fadeUpIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .service-card:hover {
-      border-top: 3px solid var(--amber);
-      border-bottom-color: var(--concrete-gray);
-      transform: translateY(-8px);
-    }
-
-    .service-card h3 {
-      font-size: 16px;
-      margin-bottom: 16px;
-      letter-spacing: 0.1em;
-    }
-
-    .service-card p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--warm-white);
-      opacity: 0.8;
-    }
-
-    @media (max-width: 768px) {
-      .what-we-build {
-        padding: 80px 24px;
-      }
-
-      .section-header {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .service-card {
-        padding: 24px;
-      }
-    }
-
-    /* Section 03: How It Works */
-    .how-it-works {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      position: relative;
-      margin-top: 60px;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      top: 40px;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-image: repeating-linear-gradient(
-        to right,
-        var(--concrete-gray) 0,
-        var(--concrete-gray) 10px,
-        transparent 10px,
-        transparent 20px
-      );
-      z-index: 0;
-    }
-
-    .timeline-step {
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      animation: fadeUpIn 0.6s var(--ease-smooth) forwards;
-    }
-
-    .timeline-step:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .timeline-step:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .step-number {
-      font-size: 3vw;
-      color: var(--amber);
-      margin-bottom: 12px;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .step-title {
-      font-size: 18px;
-      margin-bottom: 16px;
-      letter-spacing: 0.1em;
-    }
-
-    .step-description {
-      font-size: 14px;
-      color: var(--warm-white);
-      opacity: 0.7;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 768px) {
-      .how-it-works {
-        padding: 80px 24px;
-      }
-
-      .timeline {
-        grid-template-columns: 1fr;
-        gap: 60px;
-        margin-top: 0;
-      }
-
-      .timeline::before {
-        display: none;
-      }
-
-      .step-number {
-        font-size: 2.5rem;
-      }
-    }
-
-    /* Section 08: Final CTA */
-    .final-cta {
-      padding: 120px 40px;
-      text-align: center;
-      border-bottom: 1px solid var(--concrete-gray);
-      border-top: 3px solid var(--amber);
-    }
-
-    .final-cta h2 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      margin-bottom: 24px;
-      line-height: 1.2;
-    }
-
-    .final-cta > p {
-      font-size: 16px;
-      color: var(--warm-white);
-      opacity: 0.8;
-      margin-bottom: 40px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .final-cta .btn-primary {
-      padding: 1.2rem 2.5rem;
-      font-size: 16px;
-      min-width: 260px;
-      letter-spacing: 0.12em;
-    }
-
-    .cta-small-print {
-      font-size: 12px;
-      color: var(--warm-white);
-      opacity: 0.6;
-      margin-top: 24px;
-      letter-spacing: 0.05em;
-    }
-
-    @media (max-width: 768px) {
-      .final-cta {
-        padding: 80px 24px;
-      }
-
-      .final-cta h2 {
-        font-size: 1.8rem;
-      }
-
-      .final-cta .btn-primary {
-        width: 100%;
-      }
-    }
-
-    /* Section 03 Alternative: Timeline Styles (if needed for detailed view) */
-    .timeline-step-number {
-      font-size: 3rem;
-      color: var(--amber);
-      font-family: 'Barlow Condensed', sans-serif;
-      margin-bottom: 16px;
-    }
-
-    .timeline-step-title {
-      font-size: 1.1rem;
-      color: var(--amber);
-      font-family: 'Barlow Condensed', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-    }
-
-    .timeline-step-desc {
-      font-size: 0.85rem;
-      color: var(--warm-white);
-      opacity: 0.7;
-      line-height: 1.6;
-    }
-
-    /* Section 04: Results */
-    .results-section {
-      padding: 120px 40px;
-      background-color: #111111;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .results-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
-      margin-bottom: 80px;
-      text-align: center;
-    }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .stat-counter {
-      font-size: clamp(3rem, 7vw, 6rem);
-      color: var(--amber);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-
-    .stat-description {
-      font-size: 0.85rem;
-      color: var(--warm-white);
-      opacity: 0.6;
-      font-family: 'IBM Plex Mono', monospace;
-      line-height: 1.5;
-    }
-
-    .results-quote-section {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .results-quote-text {
-      font-size: 1rem;
-      color: var(--warm-white);
-      opacity: 0.55;
-      font-style: italic;
-      font-family: 'IBM Plex Mono', monospace;
-      border-left: 3px solid var(--amber);
-      padding-left: 1.2rem;
-      line-height: 1.6;
-    }
-
-    /* Section 05: Who This Is For */
-    .who-section {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .who-grid-two {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-    }
-
-    .who-list-container {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .who-list-title {
-      font-size: 1rem;
-      color: var(--amber);
-      font-family: 'Barlow Condensed', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 32px;
-    }
-
-    .who-list {
-      list-style: none;
-    }
-
-    .who-list li {
-      font-size: 0.85rem;
-      color: var(--warm-white);
-      padding: 12px 0;
-      border-bottom: 1px solid var(--concrete-gray);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .who-list li::before {
-      content: '✓';
-      color: var(--amber);
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-
-    .who-not-list li::before {
-      content: '✕';
-      color: #C0392B;
-    }
-
-    /* Section 06: Pricing */
-    .pricing-section {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .pricing-tier {
-      background-color: var(--dark-gray);
-      border: 1px solid var(--concrete-gray);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s var(--ease-smooth);
-    }
-
-    .pricing-tier:nth-child(2) {
-      border-color: var(--amber);
-      transform: scale(1.03);
-    }
-
-    .pricing-tier:hover {
-      border-color: var(--amber);
-    }
-
-    .pricing-label-text {
-      font-size: 0.75rem;
-      color: var(--warm-white);
-      opacity: 0.6;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .pricing-value {
-      font-size: 2.5rem;
-      color: var(--amber);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-
-    .pricing-name {
-      font-size: 1.1rem;
-      color: var(--warm-white);
-      font-family: 'Barlow Condensed', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 24px;
-    }
-
-    .pricing-list {
-      list-style: none;
-      margin-bottom: 32px;
-      flex-grow: 1;
-    }
-
-    .pricing-list li {
-      font-size: 0.8rem;
-      color: var(--warm-white);
-      opacity: 0.7;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--concrete-gray);
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .pricing-tier .btn-primary {
-      width: 100%;
-      text-align: center;
-    }
-
-    /* Section 07: FAQ */
-    .faq-section {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--concrete-gray);
-    }
-
-    .faq-container {
-      max-width: 900px;
-    }
-
-    .faq-item-container {
-      border-bottom: 1px solid var(--concrete-gray);
-      padding: 24px 0;
-    }
-
-    .faq-question-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s var(--ease-smooth);
-    }
-
-    .faq-question-header:hover {
-      color: var(--amber);
-    }
-
-    .faq-question-text {
-      font-size: 1rem;
-      color: var(--warm-white);
-      font-family: 'IBM Plex Mono', monospace;
-      letter-spacing: 0.03em;
-    }
-
-    .faq-toggle-icon {
-      font-size: 24px;
-      color: var(--amber);
-      transition: transform 0.3s var(--ease-smooth);
-      flex-shrink: 0;
-    }
-
-    .faq-toggle-icon.active {
-      transform: rotate(180deg);
-    }
-
-    .faq-answer-content {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.3s var(--ease-smooth);
-      margin-top: 0;
-    }
-
-    .faq-answer-content.active {
-      max-height: 500px;
-      margin-top: 16px;
-    }
-
-    .faq-answer-text {
-      font-size: 0.9rem;
-      color: var(--warm-white);
-      opacity: 0.8;
-      line-height: 1.6;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    @media (max-width: 768px) {
-      .results-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .who-grid-two {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .pricing-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .pricing-tier:nth-child(2) {
-        transform: scale(1);
-      }
-
-      .pricing-section,
-      .faq-section,
-      .who-section,
-      .results-section {
-        padding: 80px 24px;
-      }
-
-      .section-header {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Footer */
-    footer {
-      background-color: var(--dark-gray);
-      border-top: 1px solid var(--concrete-gray);
-      padding: 60px 40px;
-    }
-
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      margin-bottom: 40px;
-    }
-
-    .footer-left h3 {
-      font-size: 16px;
-      margin-bottom: 12px;
-      letter-spacing: 0.1em;
-    }
-
-    .footer-tagline {
-      font-size: 12px;
-      color: var(--warm-white);
-      opacity: 0.6;
-      line-height: 1.6;
-      letter-spacing: 0.05em;
-    }
-
-    .footer-right {
-      display: flex;
-      justify-content: flex-end;
-      gap: 40px;
-    }
-
-    .footer-right a {
-      font-size: 14px;
-      letter-spacing: 0.05em;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--concrete-gray);
-      padding-top: 24px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--warm-white);
-      opacity: 0.6;
-    }
-
-    @media (max-width: 768px) {
-      footer {
-        padding: 40px 24px;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .footer-right {
-        justify-content: flex-start;
-        gap: 24px;
-        flex-wrap: wrap;
-      }
-    }
-  </style>
+  <meta name="description" content="Cascade Systems — AI Automation Agency | n8n Workflows & Intelligent Infrastructure for Enterprise.">
+  <meta name="keywords" content="AI automation, n8n workflows, infrastructure, enterprise automation, Cascade Systems">
+  <title>Cascade Systems — AI Automation Agency | n8n Workflows & Infrastructure</title>
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://cascadesystems.example.com" />
+
+  <!-- Preload Fonts for Performance -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  </noscript>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cascadesystems.example.com/">
+  <meta property="og:title" content="Cascade Systems — AI Automation & Infrastructure">
+  <meta property="og:description" content="We build AI automation systems that eliminate manual processes — permanently.">
+  <meta property="og:image" content="https://cascadesystems.example.com/og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://cascadesystems.example.com/">
+  <meta property="twitter:title" content="Cascade Systems — AI Automation & Infrastructure">
+  <meta property="twitter:description" content="We build AI automation systems that eliminate manual processes — permanently.">
+  <meta property="twitter:image" content="https://cascadesystems.example.com/og-image.jpg">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Cascade Systems",
+      "description": "AI automation agency specializing in n8n workflows and intelligent infrastructure.",
+      "url": "https://cascadesystems.example.com"
+    }
+  </script>
+
+  <!-- Styles are now in style.css -->
 </head>
 <body>
+  <!-- Performance: Noise stays fixed on wrapper -->
+  <div class="noise-wrapper"></div>
+
+  <!-- Header & Navigation -->
   <header id="mainHeader">
     <div class="header-content">
       <div class="logo">CASCADE</div>
-      <button class="btn-primary" onclick="document.getElementById('bookAuditModal').style.display = 'flex'">BOOK AUDIT →</button>
+      <button class="btn-primary" data-open-modal aria-label="Book a Systems Audit">BOOK AUDIT →</button>
     </div>
   </header>
 
   <main>
     <!-- Hero Section -->
     <section class="hero" id="heroSection">
-      <div class="hero-section-number">01</div>
-
+      <div class="hero-bg-number">01</div>
+      
       <div class="hero-content">
-        <h1 class="hero-headline">YOUR BUSINESS RUNS ON REPETITION. OURS RUNS ON ELIMINATING IT.</h1>
-        <p class="hero-subheadline">We build AI automation systems and intelligent infrastructure that remove the manual layer from your operations — permanently.</p>
+        <h1 class="hero-headline">YOUR BUSINESS RUNS ON REPETITION.<br>OURS RUNS ON ELIMINATING IT.</h1>
+        <p class="hero-subheadline">We architect AI automation systems and intelligent infrastructure that remove the manual layer from your operations — permanently.</p>
 
         <div class="hero-buttons">
           <button class="btn-primary" onclick="document.getElementById('servicesSection').scrollIntoView({ behavior: 'smooth' })">SEE WHAT WE AUTOMATE →</button>
-          <button class="btn-secondary" onclick="document.getElementById('bookAuditModal').style.display = 'flex'">BOOK A SYSTEMS AUDIT</button>
+          <button class="btn-secondary" data-open-modal>BOOK A SYSTEMS AUDIT</button>
         </div>
       </div>
 
-      <div class="hero-terminal" id="terminal"></div>
+      <!-- Floating Asymmetric Terminal -->
+      <div class="hero-terminal" id="terminal" aria-hidden="true"></div>
 
       <div class="scroll-indicator">
         <div class="scroll-dot"></div>
@@ -986,31 +79,36 @@
       </div>
     </section>
 
+    <!-- Section Separator -->
+    <div class="section-separator" aria-hidden="true"></div>
+
     <!-- Section 02: What We Build -->
     <section class="what-we-build" id="servicesSection">
-      <div class="section-header">
-        <div class="section-label">
-          <div class="section-number">02</div>
-          <p class="section-intro">We don't sell AI consulting. We deliver working systems. Every engagement ends with something deployed, running, and replacing manual hours with automated output.</p>
-        </div>
-        <div></div>
-      </div>
-
+      <div class="section-bg-number">02</div>
       <div class="container">
+        <div class="section-header">
+          <p class="section-intro">We don't sell AI consulting. We deliver working systems. Every engagement ends with something deployed, running, and replacing manual hours with automated output.</p>
+          <div></div>
+        </div>
+
         <div class="services-grid">
           <div class="service-card">
+            <span class="service-tag">[→]</span>
             <h3>CONTENT AUTOMATION</h3>
             <p>AI pipelines that research, write, format, and publish content across channels — on schedule, without a team.</p>
           </div>
           <div class="service-card">
+            <span class="service-tag">[→]</span>
             <h3>LEAD GENERATION SYSTEMS</h3>
             <p>Automated prospecting workflows that find, qualify, and route leads into your CRM before you wake up.</p>
           </div>
           <div class="service-card">
+            <span class="service-tag">[→]</span>
             <h3>CLIENT DELIVERY PIPELINES</h3>
             <p>End-to-end workflows that handle onboarding, reporting, and communication for your client base at scale.</p>
           </div>
           <div class="service-card">
+            <span class="service-tag">[→]</span>
             <h3>AI INFRASTRUCTURE</h3>
             <p>The backbone: API orchestration, model routing, data pipelines, and automation architecture built to handle real production load.</p>
           </div>
@@ -1018,17 +116,22 @@
       </div>
     </section>
 
+    <div class="section-separator" aria-hidden="true"></div>
+
     <!-- Section 03: How It Works -->
     <section class="how-it-works" id="howItWorks">
+      <div class="section-bg-number">03</div>
       <div class="container">
         <div class="section-header">
-          <div class="section-label">
-            <div class="section-number">03</div>
-            <p class="section-intro">How we move from problem to system.</p>
-          </div>
+          <p class="section-intro">How we move from problem to system.</p>
         </div>
 
         <div class="timeline">
+          <!-- Animated connecting line -->
+          <div class="timeline-line-container">
+            <div class="timeline-line"></div>
+          </div>
+
           <div class="timeline-step">
             <div class="step-number">01</div>
             <h3 class="step-title">AUDIT</h3>
@@ -1048,426 +151,260 @@
       </div>
     </section>
 
-    <!-- Section 04: Results -->
-    <section class="results-section" id="resultsSection">
-      <div class="container">
-        <div class="section-label" style="margin-bottom: 80px;">
-          <div class="section-number">04</div>
-          <p class="section-intro" style="font-size: 16px;">What success looks like.</p>
-        </div>
+    <div class="section-separator" aria-hidden="true"></div>
 
+    <!-- Section 04: Social Proof Marquee (NEW) -->
+    <section style="overflow: hidden; padding: 60px 0; background-color: #080808; border-bottom: 1px solid var(--concrete-gray);">
+      <div style="display: flex; gap: 60px; white-space: nowrap; animation: marquee 30s linear infinite;">
+        <!-- Testimonials -->
+        <div style="display: flex; gap: 60px;">
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"CASCADE ELIMINATED 40 HOURS OF OPS PER WEEK" — ADRIAN @ TELOS</p>
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"THE ONLY AI AGENCY THAT ACTUALLY SHIPS CODE" — SARAH @ NEXUS</p>
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"REPLACED 3 DATA VAs WITH ONE n8n WORKFLOW" — MARCUS @ SCALE</p>
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"ROI WAS EVIDENT WITHIN 7 DAYS OF KICKOFF" — JESSICA @ FLOW</p>
+        </div>
+        <!-- Duplicate for loop -->
+        <div style="display: flex; gap: 60px;">
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"CASCADE ELIMINATED 40 HOURS OF OPS PER WEEK" — ADRIAN @ TELOS</p>
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"THE ONLY AI AGENCY THAT ACTUALLY SHIPS CODE" — SARAH @ NEXUS</p>
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"REPLACED 3 DATA VAs WITH ONE n8n WORKFLOW" — MARCUS @ SCALE</p>
+          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"ROI WAS EVIDENT WITHIN 7 DAYS OF KICKOFF" — JESSICA @ FLOW</p>
+        </div>
+      </div>
+      <style>
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      </style>
+    </section>
+
+    <!-- Section 05: Results -->
+    <section class="results-section" id="resultsSection" style="padding-top: 120px;">
+      <div class="section-bg-number">04</div>
+      <div class="container">
         <div class="results-stats-grid">
-          <div class="stat-item">
-            <div class="stat-counter" data-target="847">0</div>
+          <div>
+            <div class="stat-counter" data-target="847" data-suffix=" hrs">0 hrs</div>
             <p class="stat-description">Manual hours eliminated per client, per month (avg)</p>
           </div>
-          <div class="stat-item">
-            <div class="stat-counter" data-target="14">0</div>
+          <div>
+            <div class="stat-counter" data-target="14" data-suffix=" days">0 days</div>
             <p class="stat-description">Days from kickoff to first workflow in production</p>
           </div>
-          <div class="stat-item">
-            <div class="stat-counter" data-target="3.2" data-suffix="×">0</div>
+          <div>
+            <div class="stat-counter" data-target="3.2" data-suffix="×">0×</div>
             <p class="stat-description">Average output increase for content clients in 60 days</p>
           </div>
         </div>
 
-        <div class="results-quote-section">
-          <p class="results-quote-text">"Most agencies talk about AI. We architect it. The difference shows up in your ops within two weeks."</p>
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+          <p style="font-style: italic; opacity: 0.6; font-size: 18px; border-left: 2px solid var(--amber); padding-left: 30px;">"Most agencies talk about AI. We architect it. The difference shows up in your ops within two weeks."</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 05: Who This Is For -->
+    <div class="section-separator" aria-hidden="true"></div>
+
+    <!-- Section 06: Who This Is For -->
     <section class="who-section" id="whoSection">
+      <div class="section-bg-number">05</div>
       <div class="container">
-        <div class="section-label" style="margin-bottom: 80px;">
-          <div class="section-number">05</div>
-          <p class="section-intro" style="font-size: 16px;">Fit matters.</p>
+        <div class="section-header">
+          <p class="section-intro">Infrastructure that fits your stage.</p>
         </div>
 
         <div class="who-grid-two">
           <div class="who-list-container">
-            <h3 class="who-list-title">WHO THIS IS FOR</h3>
-            <ul class="who-list">
-              <li>Founders who've outgrown manual processes but aren't ready to hire</li>
-              <li>Operators running content, lead gen, or client delivery at scale</li>
-              <li>Teams that tried AI tools but never had them properly integrated</li>
-              <li>Businesses paying contractors for work that should be automated</li>
+            <h3 style="color: var(--amber); margin-bottom: 32px; font-size: 14px;">WHO THIS IS FOR</h3>
+            <ul style="list-style: none;">
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Founders who've outgrown manual processes</li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Operators running content or lead gen at scale</li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Teams that want true integration, not just another tool</li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Businesses paying contractors for repetitive work</li>
             </ul>
           </div>
           <div class="who-list-container">
-            <h3 class="who-list-title">WHO THIS IS NOT FOR</h3>
-            <ul class="who-list who-not-list">
-              <li>Companies that want a chatbot demo or a strategy deck</li>
-              <li>Teams evaluating AI for 6 months before committing</li>
-              <li>Anyone looking for the cheapest possible implementation</li>
-              <li>Organizations without clear manual processes to eliminate</li>
+            <h3 style="color: var(--error-red); margin-bottom: 32px; font-size: 14px;">WHO THIS IS NOT FOR</h3>
+            <ul style="list-style: none;">
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Companies that want a chatbot demo or pitch deck</li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Teams evaluating AI for months before committing</li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Anyone looking for the cheapest possible implementation</li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Organizations without clear manual processes</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 06: Pricing -->
+    <div class="section-separator" aria-hidden="true"></div>
+
+    <!-- Section 07: Pricing -->
     <section class="pricing-section" id="pricingSection">
+      <div class="section-bg-number">06</div>
       <div class="container">
-        <div class="section-label" style="margin-bottom: 80px;">
-          <div class="section-number">06</div>
-          <p class="section-intro" style="font-size: 16px;">Systems that fit your stage.</p>
+        
+        <div style="text-align: center; margin-bottom: 60px;">
+          <div style="display: inline-block; padding: 4px 12px; background-color: rgba(245, 166, 35, 0.1); border: 1px solid var(--amber); color: var(--amber); font-size: 10px; font-weight: bold; letter-spacing: 0.1em; margin-bottom: 24px;">3 BUILD SLOTS OPEN THIS MONTH</div>
+          <h2 style="font-size: clamp(2rem, 5vw, 4rem);">SYSTEMS THAT FIT YOUR STAGE</h2>
         </div>
 
         <div class="pricing-grid">
           <div class="pricing-tier">
-            <p class="pricing-label-text">ONE-TIME BUILD</p>
+            <p style="font-size: 11px; opacity: 0.5; margin-bottom: 16px;">ONE-TIME BUILD</p>
             <div class="pricing-value">$1,500</div>
-            <h3 class="pricing-name">STARTER PIPELINE</h3>
-            <ul class="pricing-list">
-              <li>Single workflow automation</li>
-              <li>1 AI integration</li>
-              <li>Full documentation</li>
-              <li>2-week support window</li>
+            <h3 style="font-size: 18px; margin-bottom: 24px; color: var(--amber);">STARTER PIPELINE</h3>
+            <ul style="list-style: none; margin-bottom: 40px; flex-grow: 1;">
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Single workflow automation</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">1 AI integration (LLM)</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Full documentation</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">2-week support window</li>
             </ul>
-            <button class="btn-primary" onclick="document.getElementById('bookAuditModal').style.display = 'flex'">GET STARTED →</button>
+            <button class="btn-primary" data-open-modal>GET STARTED →</button>
           </div>
 
-          <div class="pricing-tier">
-            <p class="pricing-label-text">ONE-TIME BUILD</p>
+          <div class="pricing-tier featured">
+            <div class="popular-badge">MOST POPULAR</div>
+            <p style="font-size: 11px; opacity: 0.6; margin-bottom: 16px;">ONE-TIME BUILD</p>
             <div class="pricing-value">$3,500</div>
-            <h3 class="pricing-name">GROWTH SYSTEM</h3>
-            <ul class="pricing-list">
-              <li>3 interconnected workflows</li>
-              <li>AI agent integration</li>
-              <li>CRM + email connection</li>
-              <li>30-day support window</li>
+            <h3 style="font-size: 18px; margin-bottom: 24px; color: var(--amber);">GROWTH SYSTEM</h3>
+            <ul style="list-style: none; margin-bottom: 40px; flex-grow: 1;">
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">3 interconnected workflows</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">AI agent orchestration</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">CRM + email connection</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">30-day support window</li>
             </ul>
-            <button class="btn-primary" onclick="document.getElementById('bookAuditModal').style.display = 'flex'">GET STARTED →</button>
+            <button class="btn-primary" data-open-modal>GET STARTED →</button>
           </div>
 
           <div class="pricing-tier">
-            <p class="pricing-label-text">CUSTOM PRICING</p>
-            <div class="pricing-value">TBD</div>
-            <h3 class="pricing-name">FULL INFRASTRUCTURE</h3>
-            <ul class="pricing-list">
-              <li>Complete operations audit</li>
-              <li>Unlimited workflows</li>
-              <li>AI model orchestration</li>
-              <li>Dedicated ongoing support</li>
+            <p style="font-size: 11px; opacity: 0.5; margin-bottom: 16px;">CUSTOM SCALE</p>
+            <div class="pricing-value">CUSTOM</div>
+            <h3 style="font-size: 18px; margin-bottom: 24px; color: var(--amber);">FULL INFRASTRUCTURE</h3>
+            <ul style="list-style: none; margin-bottom: 40px; flex-grow: 1;">
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Complete operations audit</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Unlimited workflows (Scoped)</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Enterprise API orchestration</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Dedicated lifecycle support</li>
             </ul>
-            <button class="btn-primary" onclick="document.getElementById('bookAuditModal').style.display = 'flex'">GET STARTED →</button>
+            <button class="btn-primary" data-open-modal>LET'S TALK →</button>
           </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="#faqSection" style="font-size: 12px; letter-spacing: 0.1em;">HAVE QUESTIONS? SEE FAQ ↓</a>
         </div>
       </div>
     </section>
 
-    <!-- Section 07: FAQ -->
+    <div class="section-separator" aria-hidden="true"></div>
+
+    <!-- Section 08: FAQ -->
     <section class="faq-section" id="faqSection">
+      <div class="section-bg-number">07</div>
       <div class="container">
-        <div class="section-label" style="margin-bottom: 80px;">
-          <div class="section-number">07</div>
-          <p class="section-intro" style="font-size: 16px;">Questions answered.</p>
+        <div class="section-header" style="margin-bottom: 100px;">
+          <h2 style="font-size: clamp(2rem, 5vw, 4rem);">ANSWERS</h2>
         </div>
 
-        <div class="faq-container">
-          <div class="faq-item-container">
-            <div class="faq-question-header" onclick="toggleFaqItem(this)">
-              <p class="faq-question-text">What tools do you use?</p>
-              <span class="faq-toggle-icon">+</span>
+        <div style="max-width: 900px;">
+          <div class="faq-item-container" style="padding: 32px 0; border-bottom: 1px solid var(--concrete-gray);">
+            <div class="faq-question-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+              <p style="font-size: 18px; letter-spacing: 0.05em;">What tools do you use?</p>
+              <div class="faq-toggle-icon">+</div>
             </div>
-            <div class="faq-answer-content">
-              <p class="faq-answer-text">Primarily n8n for workflow orchestration, combined with Claude, GPT-4, or open-source models depending on the task. We integrate with whatever stack you already have.</p>
-            </div>
-          </div>
-
-          <div class="faq-item-container">
-            <div class="faq-question-header" onclick="toggleFaqItem(this)">
-              <p class="faq-question-text">Do I need technical knowledge after handoff?</p>
-              <span class="faq-toggle-icon">+</span>
-            </div>
-            <div class="faq-answer-content">
-              <p class="faq-answer-text">No. We document everything and record a walkthrough. If you can use a web app, you can manage what we build.</p>
+            <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
+              <p style="padding-top: 24px; opacity: 0.7; font-size: 15px; line-height: 1.6;">Primarily n8n for workflow orchestration, combined with Claude, GPT-4, or open-source models depending on the task. We integrate with whatever stack you already have.</p>
             </div>
           </div>
 
-          <div class="faq-item-container">
-            <div class="faq-question-header" onclick="toggleFaqItem(this)">
-              <p class="faq-question-text">How long does a typical project take?</p>
-              <span class="faq-toggle-icon">+</span>
+          <div class="faq-item-container" style="padding: 32px 0; border-bottom: 1px solid var(--concrete-gray);">
+            <div class="faq-question-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+              <p style="font-size: 18px; letter-spacing: 0.05em;">Do I need technical knowledge after handoff?</p>
+              <div class="faq-toggle-icon">+</div>
             </div>
-            <div class="faq-answer-content">
-              <p class="faq-answer-text">Starter pipelines ship in 5–7 days. Growth systems take 10–14. Infrastructure engagements vary — we scope it up front.</p>
-            </div>
-          </div>
-
-          <div class="faq-item-container">
-            <div class="faq-question-header" onclick="toggleFaqItem(this)">
-              <p class="faq-question-text">Can you work inside tools I already use?</p>
-              <span class="faq-toggle-icon">+</span>
-            </div>
-            <div class="faq-answer-content">
-              <p class="faq-answer-text">Yes. We integrate with CRMs, email platforms, Slack, Google Workspace, Notion, Airtable, and most tools with an API.</p>
+            <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
+              <p style="padding-top: 24px; opacity: 0.7; font-size: 15px; line-height: 1.6;">No. We document everything and record a walkthrough. If you can use a web app, you can manage what we build. No code maintenance required from your side.</p>
             </div>
           </div>
 
-          <div class="faq-item-container">
-            <div class="faq-question-header" onclick="toggleFaqItem(this)">
-              <p class="faq-question-text">What if something breaks after the project ends?</p>
-              <span class="faq-toggle-icon">+</span>
+          <div class="faq-item-container" style="padding: 32px 0; border-bottom: 1px solid var(--concrete-gray);">
+            <div class="faq-question-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+              <p style="font-size: 18px; letter-spacing: 0.05em;">How long does a typical project take?</p>
+              <div class="faq-toggle-icon">+</div>
             </div>
-            <div class="faq-answer-content">
-              <p class="faq-answer-text">Every project includes a support window. After that, we offer retainer maintenance or a one-time fix fee — your choice.</p>
+            <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
+              <p style="padding-top: 24px; opacity: 0.7; font-size: 15px; line-height: 1.6;">Starter pipelines ship in 5–7 days. Growth systems take 10–14. Infrastructure engagements vary — we scope it up front and deliver in phases.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 08: Final CTA -->
+    <!-- Final CTA -->
     <section class="final-cta">
       <div class="container">
-        <h2>READY TO STOP DOING IT MANUALLY?</h2>
-        <p>Book a 30-minute systems audit. Free. We map what can be automated and what it's worth.</p>
-        <button class="btn-primary" onclick="document.getElementById('bookAuditModal').style.display = 'flex'">BOOK YOUR AUDIT →</button>
-        <p class="cta-small-print">No pitch decks. No retainer required. Just a real conversation about your ops.</p>
+        <h2 style="font-size: clamp(2.5rem, 8vw, 6rem); margin-bottom: 40px; color: var(--warm-white);">READY TO STOP DOING IT MANUALLY?</h2>
+        <button class="btn-primary" style="padding: 24px 60px; font-size: 18px;" data-open-modal>BOOK YOUR SYSTEMS AUDIT →</button>
+        <p style="margin-top: 40px; opacity: 0.5; font-size: 13px; letter-spacing: 0.1em;">NO PITCH DECKS. NO RETAINERS. JUST INFRASTRUCTURE.</p>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
   <footer>
+    <div class="footer-ghost-wordmark">CASCADE</div>
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-left">
-          <h3>CASCADE</h3>
-          <p class="footer-tagline">AI AUTOMATION & INFRASTRUCTURE — BUILT TO RUN WITHOUT YOU</p>
+      <div class="footer-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 40px;">
+        <div style="flex-basis: 300px;">
+          <h3 style="color: var(--amber); margin-bottom: 16px;">CASCADE</h3>
+          <p style="font-size: 12px; opacity: 0.6; line-height: 1.6;">AI AUTOMATION & INTELLIGENT INFRASTRUCTURE.<br>BUILT TO RUN WITHOUT YOU.</p>
         </div>
-        <div class="footer-right">
+        <div class="footer-nav">
           <a href="#servicesSection">SERVICES</a>
-          <a href="#pricingSection">PRICING</a>
           <a href="#howItWorks">HOW IT WORKS</a>
-          <a href="javascript:void(0)" onclick="document.getElementById('bookAuditModal').style.display = 'flex'">BOOK A CALL</a>
+          <a href="#pricingSection">PRICING</a>
+          <a href="#faqSection">FAQ</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        © 2025 CASCADE Systems — Automation that scales.
+      <div style="margin-top: 80px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 11px; opacity: 0.4; letter-spacing: 0.1em;">
+        © 2026 CASCADE SYSTEMS — ALL SYSTEMS OPERATIONAL ✓
       </div>
     </div>
   </footer>
 
   <!-- Modal for Booking Audit -->
-  <div id="bookAuditModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.85); z-index: 1000; justify-content: center; align-items: center;">
-    <div style="background-color: var(--dark-gray); border: 1px solid var(--concrete-gray); padding: 60px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
-      <h2 style="margin-bottom: 32px; font-family: 'Barlow Condensed'; text-transform: uppercase; letter-spacing: 0.08em;">BOOK YOUR SYSTEMS AUDIT</h2>
-
-      <form id="auditForm" onsubmit="handleFormSubmit(event)">
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 13px; margin-bottom: 8px; letter-spacing: 0.05em;">YOUR NAME</label>
-          <input type="text" name="name" required style="width: 100%; padding: 12px; background-color: var(--near-black); border: 1px solid var(--concrete-gray); color: var(--warm-white); font-family: 'IBM Plex Mono'; font-size: 14px;">
+  <div id="bookAuditModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <h2 style="margin-bottom: 32px; font-size: 24px; color: var(--amber);">BOOK YOUR AUDIT</h2>
+      
+      <form id="auditForm">
+        <div class="form-group">
+          <label class="form-label">YOUR NAME</label>
+          <input type="text" name="name" class="form-input" required placeholder="John Doe">
         </div>
-
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 13px; margin-bottom: 8px; letter-spacing: 0.05em;">COMPANY EMAIL</label>
-          <input type="email" name="email" required style="width: 100%; padding: 12px; background-color: var(--near-black); border: 1px solid var(--concrete-gray); color: var(--warm-white); font-family: 'IBM Plex Mono'; font-size: 14px;">
+        <div class="form-group">
+          <label class="form-label">COMPANY EMAIL</label>
+          <input type="email" name="email" class="form-input" required placeholder="john@company.com">
         </div>
-
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 13px; margin-bottom: 8px; letter-spacing: 0.05em;">COMPANY NAME</label>
-          <input type="text" name="company" required style="width: 100%; padding: 12px; background-color: var(--near-black); border: 1px solid var(--concrete-gray); color: var(--warm-white); font-family: 'IBM Plex Mono'; font-size: 14px;">
+        <div class="form-group">
+          <label class="form-label">WHAT SHOULD WE AUTOMATE?</label>
+          <textarea name="process" class="form-input" required placeholder="Describe your manual bottleneck..." style="min-height: 120px; resize: none;"></textarea>
         </div>
-
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 13px; margin-bottom: 8px; letter-spacing: 0.05em;">WHAT PROCESS WOULD YOU AUTOMATE FIRST?</label>
-          <textarea name="process" required style="width: 100%; padding: 12px; background-color: var(--near-black); border: 1px solid var(--concrete-gray); color: var(--warm-white); font-family: 'IBM Plex Mono'; font-size: 14px; min-height: 100px; resize: vertical;"></textarea>
-        </div>
-
-        <button type="submit" class="btn-primary" style="width: 100%; margin-bottom: 16px;">SEND REQUEST →</button>
-        <button type="button" onclick="document.getElementById('bookAuditModal').style.display = 'none'" class="btn-secondary" style="width: 100%;">CLOSE</button>
+        <button type="submit" class="btn-primary" style="width: 100%;">REQUEST CALL →</button>
       </form>
 
-      <div id="formMessage" style="margin-top: 16px; padding: 16px; background-color: var(--near-black); border: 1px solid var(--concrete-gray); display: none; text-align: center; font-size: 14px;"></div>
+      <div id="formMessage" style="display: none; text-align: center; padding: 40px 0;"></div>
     </div>
   </div>
 
-  <script>
-    function typewriterAnimation() {
-      const lines = [
-        '> INITIALIZING WORKFLOW...',
-        '> CONNECTING: CRM → AI_AGENT → EMAIL → DONE',
-        '> TASKS ELIMINATED: 847 this week',
-        '> STATUS: RUNNING ✓'
-      ];
+  <!-- Mobile Sticky CTA Bar -->
+  <div id="mobile-sticky-cta">
+    <button class="btn-primary" style="width: 100%; border-radius: 0;" data-open-modal>BOOK YOUR AUDIT →</button>
+  </div>
 
-      const terminal = document.getElementById('terminal');
-      terminal.innerHTML = '';
-      let lineIndex = 0;
-      let charIndex = 0;
-
-      function getCurrentLine() {
-        return terminal.querySelector('.terminal-active');
-      }
-
-      function addNewLine() {
-        const line = document.createElement('div');
-        line.className = 'terminal-active';
-        line.style.color = 'var(--terminal-green)';
-        line.style.fontFamily = "'IBM Plex Mono', monospace";
-        line.style.fontSize = '12px';
-        line.style.lineHeight = '1.8';
-        line.style.minHeight = '1.8em';
-        terminal.appendChild(line);
-      }
-
-      function type() {
-        if (lineIndex >= lines.length) {
-          const activeLine = getCurrentLine();
-          if (activeLine) activeLine.classList.remove('terminal-active');
-          return;
-        }
-
-        if (charIndex === 0) addNewLine();
-
-        const activeLine = getCurrentLine();
-        const currentLine = lines[lineIndex];
-
-        if (charIndex < currentLine.length) {
-          activeLine.textContent = currentLine.substring(0, charIndex + 1);
-          charIndex++;
-          setTimeout(type, 30);
-        } else {
-          activeLine.classList.remove('terminal-active');
-          lineIndex++;
-          charIndex = 0;
-          setTimeout(type, 400);
-        }
-      }
-
-      type();
-    }
-
-    typewriterAnimation();
-
-    const header = document.getElementById('mainHeader');
-    const heroSection = document.getElementById('heroSection');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > heroSection.offsetHeight) {
-        header.classList.add('visible');
-      } else {
-        header.classList.remove('visible');
-      }
-    });
-
-    function animateCounter(element) {
-      const target = parseFloat(element.getAttribute('data-target'));
-      const isDecimal = !Number.isInteger(target);
-      const suffix = element.getAttribute('data-suffix') || '';
-      let current = 0;
-      const duration = 1500;
-      const steps = 60;
-      const increment = target / steps;
-      const interval = duration / steps;
-
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          element.textContent = (isDecimal ? target.toFixed(1) : target) + suffix;
-          clearInterval(timer);
-        } else {
-          element.textContent = (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
-        }
-      }, interval);
-    }
-
-    const observerOptions = {
-      threshold: 0.5
-    };
-
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
-          entry.target.setAttribute('data-animated', 'true');
-          animateCounter(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.stat-number').forEach(stat => {
-      statsObserver.observe(stat);
-    });
-
-    document.querySelectorAll('.stat-counter').forEach(stat => {
-      statsObserver.observe(stat);
-    });
-
-    const cardsObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          const delay = index * 0.15;
-          entry.target.style.animationDelay = `${delay}s`;
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.service-card').forEach(card => {
-      cardsObserver.observe(card);
-    });
-
-    function toggleFaqItem(element) {
-      const answer = element.nextElementSibling;
-      const toggle = element.querySelector('.faq-toggle-icon');
-
-      document.querySelectorAll('.faq-answer-content').forEach(ans => {
-        if (ans !== answer) {
-          ans.classList.remove('active');
-          ans.previousElementSibling.querySelector('.faq-toggle-icon').classList.remove('active');
-        }
-      });
-
-      answer.classList.toggle('active');
-      toggle.classList.toggle('active');
-    }
-
-    function handleFormSubmit(event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const formMessage = document.getElementById('formMessage');
-
-      const name = form.querySelector('input[name="name"]').value;
-      const email = form.querySelector('input[name="email"]').value;
-      const company = form.querySelector('input[name="company"]').value;
-      const process = form.querySelector('textarea[name="process"]').value;
-
-      if (!name || !email || !company || !process) {
-        formMessage.textContent = 'Please fill in all fields.';
-        formMessage.style.display = 'block';
-        return;
-      }
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        formMessage.textContent = 'Please enter a valid email address.';
-        formMessage.style.display = 'block';
-        return;
-      }
-
-      formMessage.textContent = 'Thank you! We\'ll be in touch within 24 hours to schedule your audit.';
-      formMessage.style.display = 'block';
-      formMessage.style.borderColor = 'var(--amber)';
-      form.style.display = 'none';
-
-      setTimeout(() => {
-        document.getElementById('bookAuditModal').style.display = 'none';
-        form.style.display = 'block';
-        form.reset();
-        formMessage.style.display = 'none';
-        formMessage.style.borderColor = 'var(--concrete-gray)';
-      }, 3000);
-    }
-
-    document.getElementById('bookAuditModal').addEventListener('click', (e) => {
-      if (e.target.id === 'bookAuditModal') {
-        document.getElementById('bookAuditModal').style.display = 'none';
-      }
-    });
-  </script>
+  <!-- Main script -->
+  <script type="module" src="/main.js"></script>
 </body>
 </html>
