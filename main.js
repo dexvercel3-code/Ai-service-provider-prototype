@@ -15,7 +15,72 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileCTA();
   initFooterNav();
   initScrollTo();
+  initFlowchart();
 });
+
+function initFlowchart() {
+  const nodes = [
+    { node: document.getElementById('flow-node-1'), color: '#F5A623' },
+    { node: document.getElementById('flow-node-2'), color: '#00CFFF' },
+    { node: document.getElementById('flow-node-3'), color: '#00FF87' },
+    { node: document.getElementById('flow-node-4'), color: '#7B61FF' },
+  ];
+
+  const pipes = [
+    { el: document.getElementById('pipe-1'), color: '#F5A623' },
+    { el: document.getElementById('pipe-2'), color: '#00CFFF' },
+    { el: document.getElementById('pipe-3'), color: '#00FF87' },
+  ];
+
+  let step = 0;
+
+  function clearAll() {
+    nodes.forEach(n => {
+      n.node.classList.remove('active');
+      n.node.style.removeProperty('--node-color');
+    });
+    pipes.forEach(p => {
+      p.el.classList.remove('active');
+      p.el.style.removeProperty('--pipe-color');
+      const dot = p.el.querySelector('.pipe-dot');
+      if (dot) {
+        dot.classList.remove('traveling');
+        void dot.offsetWidth; // force reflow to restart animation
+      }
+    });
+  }
+
+  function runStep() {
+    clearAll();
+
+    // Activate current node
+    const currentNode = nodes[step];
+    if (currentNode && currentNode.node) {
+      currentNode.node.classList.add('active');
+      currentNode.node.style.setProperty('--node-color', currentNode.color);
+    }
+
+    // Activate pipe leading out of current node (if not last)
+    if (step < pipes.length) {
+      const currentPipe = pipes[step];
+      if (currentPipe && currentPipe.el) {
+        currentPipe.el.classList.add('active');
+        currentPipe.el.style.setProperty('--pipe-color', currentPipe.color);
+        const dot = currentPipe.el.querySelector('.pipe-dot');
+        if (dot) {
+          dot.style.fill = currentPipe.color;
+          dot.classList.add('traveling');
+        }
+      }
+    }
+
+    step = (step + 1) % nodes.length;
+  }
+
+  // Start immediately then loop
+  runStep();
+  setInterval(runStep, 1200);
+}
 
 // Scroll to Section
 function initScrollTo() {

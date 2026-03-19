@@ -174,37 +174,72 @@
         </div>
 
         <div class="mini-flowchart">
-          <div class="flow-step">
-            <div class="flow-step-number">01</div>
-            <div class="flow-step-box">CLIENT INTAKE</div>
-            <div class="flow-step-label">Raw lead data enters the system</div>
+          <div class="flowchart-inner">
+
+            <div class="flow-node" id="flow-node-1">
+              <div class="flow-node-number">01</div>
+              <div class="flow-node-box">
+                <div class="flow-node-pulse"></div>
+                <span>CLIENT INTAKE</span>
+              </div>
+              <div class="flow-node-label">Raw lead data enters the system</div>
+            </div>
+
+            <div class="flow-pipe" id="pipe-1">
+              <svg class="pipe-svg" viewBox="0 0 120 20" preserveAspectRatio="none">
+                <line x1="0" y1="10" x2="120" y2="10" stroke="#2A2A2A" stroke-width="1" stroke-dasharray="4 6"/>
+                <circle class="pipe-dot" r="4" cy="10" cx="0" fill="#F5A623"/>
+              </svg>
+              <span class="pipe-arrow">›</span>
+            </div>
+
+            <div class="flow-node" id="flow-node-2">
+              <div class="flow-node-number">02</div>
+              <div class="flow-node-box">
+                <div class="flow-node-pulse"></div>
+                <span>AI CLASSIFIER</span>
+              </div>
+              <div class="flow-node-label">LLM scores and categorizes intent</div>
+            </div>
+
+            <div class="flow-pipe" id="pipe-2">
+              <svg class="pipe-svg" viewBox="0 0 120 20" preserveAspectRatio="none">
+                <line x1="0" y1="10" x2="120" y2="10" stroke="#2A2A2A" stroke-width="1" stroke-dasharray="4 6"/>
+                <circle class="pipe-dot" r="4" cy="10" cx="0" fill="#00FF87"/>
+              </svg>
+              <span class="pipe-arrow">›</span>
+            </div>
+
+            <div class="flow-node" id="flow-node-3">
+              <div class="flow-node-number">03</div>
+              <div class="flow-node-box">
+                <div class="flow-node-pulse"></div>
+                <span>CRM ROUTING</span>
+              </div>
+              <div class="flow-node-label">Contact assigned and tagged automatically</div>
+            </div>
+
+            <div class="flow-pipe" id="pipe-3">
+              <svg class="pipe-svg" viewBox="0 0 120 20" preserveAspectRatio="none">
+                <line x1="0" y1="10" x2="120" y2="10" stroke="#2A2A2A" stroke-width="1" stroke-dasharray="4 6"/>
+                <circle class="pipe-dot" r="4" cy="10" cx="0" fill="#7B61FF"/>
+              </svg>
+              <span class="pipe-arrow">›</span>
+            </div>
+
+            <div class="flow-node" id="flow-node-4">
+              <div class="flow-node-number">04</div>
+              <div class="flow-node-box">
+                <div class="flow-node-pulse"></div>
+                <span>EMAIL SEQUENCE</span>
+              </div>
+              <div class="flow-node-label">Personalized drip fires within 60s</div>
+            </div>
+
           </div>
-          <div class="flow-connector">
-            <div class="flow-connector-line"></div>
-            <div class="flow-connector-arrow">→</div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-number">02</div>
-            <div class="flow-step-box highlight">AI CLASSIFIER</div>
-            <div class="flow-step-label">LLM scores and categorizes intent</div>
-          </div>
-          <div class="flow-connector">
-            <div class="flow-connector-line"></div>
-            <div class="flow-connector-arrow">→</div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-number">03</div>
-            <div class="flow-step-box">CRM ROUTING</div>
-            <div class="flow-step-label">Contact assigned and tagged automatically</div>
-          </div>
-          <div class="flow-connector">
-            <div class="flow-connector-line"></div>
-            <div class="flow-connector-arrow">→</div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-number">04</div>
-            <div class="flow-step-box">EMAIL SEQUENCE</div>
-            <div class="flow-step-label">Personalized drip fires within 60 seconds</div>
+          <div class="flowchart-status">
+            <span class="status-dot"></span>
+            <span class="status-text">PIPELINE ACTIVE — 0 ERRORS</span>
           </div>
         </div>
 
