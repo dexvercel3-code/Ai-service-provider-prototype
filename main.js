@@ -383,8 +383,8 @@ function initCounters() {
 // Scroll Entrance Animations
 function initScrollReveal() {
   const observerOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
+    threshold: 0.12,
+    rootMargin: "0px 0px -40px 0px"
   };
 
   const revealObserver = new IntersectionObserver((entries) => {
@@ -396,15 +396,11 @@ function initScrollReveal() {
     });
   }, observerOptions);
 
-  // Add reveal class to elements for scroll entrance
-  const elementsToReveal = document.querySelectorAll(
-    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item-container, .stat-item, section'
+  const targets = document.querySelectorAll(
+    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item-container, .stat-item'
   );
-  
-  elementsToReveal.forEach(el => {
-    el.classList.add('reveal-wipe');
-    revealObserver.observe(el);
-  });
+
+  targets.forEach(el => revealObserver.observe(el));
 }
 
 // FAQ Accordion
