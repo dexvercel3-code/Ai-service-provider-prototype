@@ -47,6 +47,10 @@
   <!-- Performance: Noise stays fixed on wrapper -->
   <div class="noise-wrapper"></div>
 
+  <!-- Progress Indicators -->
+  <div id="scroll-progress-line"></div>
+  <a href="#heroSection" id="back-to-top" aria-label="Back to top">↑</a>
+
   <!-- Header & Navigation -->
   <header id="mainHeader">
     <div class="header-content">
@@ -60,6 +64,9 @@
     <section class="hero" id="heroSection">
       <div class="hero-bg-number">01</div>
       
+      <!-- Floating Asymmetric Terminal -->
+      <div class="hero-terminal" id="terminal" aria-hidden="true"></div>
+
       <div class="hero-content">
         <h1 class="hero-headline">YOUR BUSINESS RUNS ON REPETITION.<br>OURS RUNS ON ELIMINATING IT.</h1>
         <p class="hero-subheadline">We architect AI automation systems and intelligent infrastructure that remove the manual layer from your operations — permanently.</p>
@@ -69,9 +76,6 @@
           <button class="btn-secondary" data-open-modal>BOOK A SYSTEMS AUDIT</button>
         </div>
       </div>
-
-      <!-- Floating Asymmetric Terminal -->
-      <div class="hero-terminal" id="terminal" aria-hidden="true"></div>
 
       <div class="scroll-indicator">
         <div class="scroll-dot"></div>
@@ -87,8 +91,7 @@
       <div class="section-bg-number">02</div>
       <div class="container">
         <div class="section-header">
-          <p class="section-intro">We don't sell AI consulting. We deliver working systems. Every engagement ends with something deployed, running, and replacing manual hours with automated output.</p>
-          <div></div>
+          <p class="section-intro">Your business is its processes. If those processes are manual, you aren't scaling — you're just hiring more complexity.</p>
         </div>
 
         <div class="services-grid">
@@ -113,6 +116,13 @@
             <p>The backbone: API orchestration, model routing, data pipelines, and automation architecture built to handle real production load.</p>
           </div>
         </div>
+        <div class="tool-logos-strip">
+          <span class="tool-logo">n8n</span>
+          <span class="tool-logo">OPENAI</span>
+          <span class="tool-logo">HUBSPOT</span>
+          <span class="tool-logo">SLACK</span>
+          <span class="tool-logo">AIRTABLE</span>
+        </div>
       </div>
     </section>
 
@@ -123,7 +133,18 @@
       <div class="section-bg-number">03</div>
       <div class="container">
         <div class="section-header">
-          <p class="section-intro">How we move from problem to system.</p>
+          <p class="section-intro">Most agencies deliver a slide deck. We deliver a systems diagram and the API keys to run it.</p>
+        </div>
+
+        <!-- Mini Flowchart Example -->
+        <div class="mini-flowchart" aria-hidden="true">
+          <div class="flow-box">CLIENT INTAKE</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color: var(--amber);">AI CLASSIFIER</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">CRM ROUTING</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background: rgba(245, 166, 35, 0.1);">EMAIL SEQUENCE</div>
         </div>
 
         <div class="timeline">
@@ -184,22 +205,23 @@
       <div class="section-bg-number">04</div>
       <div class="container">
         <div class="results-stats-grid">
-          <div>
+          <div class="stat-item">
             <div class="stat-counter" data-target="847" data-suffix=" hrs">0 hrs</div>
-            <p class="stat-description">Manual hours eliminated per client, per month (avg)</p>
+            <p class="stat-description">Numbers don't lie. Manual processes do.</p>
           </div>
-          <div>
+          <div class="stat-item">
             <div class="stat-counter" data-target="14" data-suffix=" days">0 days</div>
-            <p class="stat-description">Days from kickoff to first workflow in production</p>
+            <p class="stat-description">Kickoff to production is a fixed race, not a crawl.</p>
           </div>
-          <div>
+          <div class="stat-item">
             <div class="stat-counter" data-target="3.2" data-suffix="×">0×</div>
-            <p class="stat-description">Average output increase for content clients in 60 days</p>
+            <p class="stat-description">Scale output without scaling your payroll.</p>
           </div>
         </div>
 
-        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
-          <p style="font-style: italic; opacity: 0.6; font-size: 18px; border-left: 2px solid var(--amber); padding-left: 30px;">"Most agencies talk about AI. We architect it. The difference shows up in your ops within two weeks."</p>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto; position: relative; z-index: 10;">
+          <p style="font-style: italic; opacity: 0.8; font-size: 20px; border-left: 2px solid var(--amber); padding-left: 30px; line-height: 1.6;">"Most agencies talk about AI. We architect it. The difference shows up in your ops within two weeks."</p>
+          <p style="margin-top: 16px; font-size: 12px; letter-spacing: 0.2em; opacity: 0.5;">— OPERATIONS LEAD, SaaS COMPANY (40 EMPLOYEES)</p>
         </div>
       </div>
     </section>
@@ -211,7 +233,7 @@
       <div class="section-bg-number">05</div>
       <div class="container">
         <div class="section-header">
-          <p class="section-intro">Infrastructure that fits your stage.</p>
+          <p class="section-intro">Fit is the only differentiator that scales. If you aren't ready to automate, we aren't ready to build.</p>
         </div>
 
         <div class="who-grid-two">
@@ -246,7 +268,8 @@
         
         <div style="text-align: center; margin-bottom: 60px;">
           <div style="display: inline-block; padding: 4px 12px; background-color: rgba(245, 166, 35, 0.1); border: 1px solid var(--amber); color: var(--amber); font-size: 10px; font-weight: bold; letter-spacing: 0.1em; margin-bottom: 24px;">3 BUILD SLOTS OPEN THIS MONTH</div>
-          <h2 style="font-size: clamp(2rem, 5vw, 4rem);">SYSTEMS THAT FIT YOUR STAGE</h2>
+          <h2 style="font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 24px;">SYSTEMS THAT FIT YOUR STAGE</h2>
+          <p style="opacity: 0.6; font-size: 14px; max-width: 600px; margin: 0 auto;">Every system is scoped, built, and handed off in a fixed timeline. No retainers required to start.</p>
         </div>
 
         <div class="pricing-grid">
@@ -274,7 +297,7 @@
               <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">CRM + email connection</li>
               <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">30-day support window</li>
             </ul>
-            <button class="btn-primary" data-open-modal>GET STARTED →</button>
+            <button class="btn-primary" data-open-modal>MOST POPULAR — GET STARTED →</button>
           </div>
 
           <div class="pricing-tier">
@@ -285,7 +308,7 @@
               <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Complete operations audit</li>
               <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Unlimited workflows (Scoped)</li>
               <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Enterprise API orchestration</li>
-              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Dedicated lifecycle support</li>
+              <li style="padding: 12px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 13px; opacity: 0.8;">Scoped after audit. No surprises.</li>
             </ul>
             <button class="btn-primary" data-open-modal>LET'S TALK →</button>
           </div>
@@ -304,7 +327,7 @@
       <div class="section-bg-number">07</div>
       <div class="container">
         <div class="section-header" style="margin-bottom: 100px;">
-          <h2 style="font-size: clamp(2rem, 5vw, 4rem);">ANSWERS</h2>
+          <p class="section-intro">Questions are placeholders for hesitation. Here is the clarity you need.</p>
         </div>
 
         <div style="max-width: 900px;">
@@ -314,7 +337,7 @@
               <div class="faq-toggle-icon">+</div>
             </div>
             <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
-              <p style="padding-top: 24px; opacity: 0.7; font-size: 15px; line-height: 1.6;">Primarily n8n for workflow orchestration, combined with Claude, GPT-4, or open-source models depending on the task. We integrate with whatever stack you already have.</p>
+              <p style="padding-top: 24px; opacity: 0.8; font-size: 14px; line-height: 1.5;">n8n for orchestration, combined with Claude or GPT-4. We integrate with your existing stack via custom APIs.</p>
             </div>
           </div>
 
@@ -324,7 +347,7 @@
               <div class="faq-toggle-icon">+</div>
             </div>
             <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
-              <p style="padding-top: 24px; opacity: 0.7; font-size: 15px; line-height: 1.6;">No. We document everything and record a walkthrough. If you can use a web app, you can manage what we build. No code maintenance required from your side.</p>
+              <p style="padding-top: 24px; opacity: 0.8; font-size: 14px; line-height: 1.5;">No. We deliver full documentation and video walkthroughs. If you can use a web app, you can own the system.</p>
             </div>
           </div>
 
@@ -334,7 +357,7 @@
               <div class="faq-toggle-icon">+</div>
             </div>
             <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
-              <p style="padding-top: 24px; opacity: 0.7; font-size: 15px; line-height: 1.6;">Starter pipelines ship in 5–7 days. Growth systems take 10–14. Infrastructure engagements vary — we scope it up front and deliver in phases.</p>
+              <p style="padding-top: 24px; opacity: 0.8; font-size: 14px; line-height: 1.5;">Starter pipelines ship in 7 days. custom infrastructure takes 14–21 days. Fixed timelines, zero drift.</p>
             </div>
           </div>
         </div>
@@ -377,22 +400,39 @@
   <div id="bookAuditModal" class="modal">
     <div class="modal-content">
       <button class="modal-close" aria-label="Close modal">&times;</button>
-      <h2 style="margin-bottom: 32px; font-size: 24px; color: var(--amber);">BOOK YOUR AUDIT</h2>
       
+      <div class="step-indicator">
+        <div class="step-dot active" id="dot-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+      </div>
+
       <form id="auditForm">
-        <div class="form-group">
-          <label class="form-label">YOUR NAME</label>
-          <input type="text" name="name" class="form-input" required placeholder="John Doe">
+        <!-- Step 1: Contact Info -->
+        <div class="modal-step active" id="modal-step-1">
+          <h2 style="margin-bottom: 24px; font-size: 20px; color: var(--amber);">CONTACT INFORMATION</h2>
+          <div class="form-group">
+            <label class="form-label">YOUR NAME</label>
+            <input type="text" name="name" class="form-input" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">COMPANY EMAIL</label>
+            <input type="email" name="email" class="form-input" required placeholder="john@company.com">
+          </div>
+          <button type="button" class="btn-primary" style="width: 100%;" id="next-step">NEXT: SYSTEM GOALS →</button>
         </div>
-        <div class="form-group">
-          <label class="form-label">COMPANY EMAIL</label>
-          <input type="email" name="email" class="form-input" required placeholder="john@company.com">
+
+        <!-- Step 2: System Goals -->
+        <div class="modal-step" id="modal-step-2">
+          <h2 style="margin-bottom: 24px; font-size: 20px; color: var(--amber);">SYSTEM GOALS</h2>
+          <div class="form-group">
+            <label class="form-label">WHAT SHOULD WE AUTOMATE FIRST?</label>
+            <textarea name="process" class="form-input" required placeholder="Describe your manual bottleneck..." style="min-height: 120px; resize: none;"></textarea>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button type="button" class="btn-secondary" id="prev-step">BACK</button>
+            <button type="submit" class="btn-primary" style="flex-grow: 1;">REQUEST CALL →</button>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">WHAT SHOULD WE AUTOMATE?</label>
-          <textarea name="process" class="form-input" required placeholder="Describe your manual bottleneck..." style="min-height: 120px; resize: none;"></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%;">REQUEST CALL →</button>
       </form>
 
       <div id="formMessage" style="display: none; text-align: center; padding: 40px 0;"></div>

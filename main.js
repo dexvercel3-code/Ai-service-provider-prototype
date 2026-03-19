@@ -2,6 +2,8 @@ import './style.css'
 
 // Cascade Systems - Main JavaScript
 document.addEventListener('DOMContentLoaded', () => {
+  initScrollProgress();
+  initBackToTop();
   initCustomCursor();
   initTypewriter();
   initHeader();
@@ -11,7 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
   initModal();
   initTimeline();
   initMobileCTA();
+  initFooterNav();
 });
+
+// Scroll Progress Line
+function initScrollProgress() {
+  const line = document.getElementById('scroll-progress-line');
+  if (!line) return;
+
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    line.style.height = scrolled + "%";
+  }, { passive: true });
+}
+
+// Back to Top
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 1000) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }, { passive: true });
+}
 
 // Custom Cursor
 function initCustomCursor() {
@@ -160,12 +190,9 @@ function initScrollReveal() {
   };
 
   const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Stagger logic
-        setTimeout(() => {
-          entry.target.classList.add('active');
-        }, index * 100);
+        entry.target.classList.add('active');
         revealObserver.unobserve(entry.target);
       }
     });
@@ -173,7 +200,7 @@ function initScrollReveal() {
 
   // Add reveal class to elements for scroll entrance
   const elementsToReveal = document.querySelectorAll(
-    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item-container, .results-stats-grid > div'
+    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item-container, .stat-item'
   );
   
   elementsToReveal.forEach(el => {
@@ -229,16 +256,58 @@ function initModal() {
   const closeButton = document.querySelector('.modal-close');
   const form = document.getElementById('auditForm');
   const formMessage = document.getElementById('formMessage');
+  
+  const step1 = document.getElementById('modal-step-1');
+  const step2 = document.getElementById('modal-step-2');
+  const dot1 = document.getElementById('dot-1');
+  const dot2 = document.getElementById('dot-2');
+  const nextBtn = document.getElementById('next-step');
+  const prevBtn = document.getElementById('prev-step');
 
   const openModal = () => {
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    resetModal();
   };
 
   const closeModal = () => {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
   };
+
+  const resetModal = () => {
+    step1.classList.add('active');
+    step2.classList.remove('active');
+    dot1.classList.add('active');
+    dot2.classList.remove('active');
+    form.style.display = 'block';
+    formMessage.style.display = 'none';
+  };
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const name = form.querySelector('[name="name"]').value;
+      const email = form.querySelector('[name="email"]').value;
+      if (name && email) {
+        step1.classList.remove('active');
+        step2.classList.add('active');
+        dot1.classList.remove('active');
+        dot2.classList.add('active');
+      } else {
+        form.querySelector('[name="name"]').reportValidity();
+        form.querySelector('[name="email"]').reportValidity();
+      }
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      step1.classList.add('active');
+      step2.classList.remove('active');
+      dot1.classList.add('active');
+      dot2.classList.remove('active');
+    });
+  }
 
   openButtons.forEach(btn => btn.addEventListener('click', openModal));
   if (closeButton) closeButton.addEventListener('click', closeModal);
@@ -322,5 +391,29 @@ function initMobileCTA() {
     } else {
       stickyCta.classList.remove('visible');
     }
+  }, { passive: true });
+}
+
+// Footer Nav Active State
+function initFooterNav() {
+  const navLinks = document.querySelectorAll('.footer-nav a');
+  const sections = document.querySelectorAll('section');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
   }, { passive: true });
 }
