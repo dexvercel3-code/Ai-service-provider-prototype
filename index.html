@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cascade Systems — AI Automation Agency | n8n Workflows & Intelligent Infrastructure for Enterprise.">
   <meta name="keywords" content="AI automation, n8n workflows, infrastructure, enterprise automation, Cascade Systems">
-  <title>Cascade Systems — AI Automation Agency | n8n Workflows & Infrastructure</title>
+  <title>Cascade Systems — AI Automation & n8n Infrastructure Agency</title>
 
   <!-- Canonical -->
   <link rel="canonical" href="https://cascadesystems.example.com" />
@@ -49,7 +49,6 @@
   <!-- Performance: Noise stays fixed on wrapper -->
   <div class="noise-wrapper"></div>
   <div class="crt-overlay"></div>
-  <div class="data-background-pipe" aria-hidden="true"></div>
 
   <!-- Progress Indicators -->
   <div id="scroll-progress-line"></div>
@@ -60,9 +59,10 @@
     <div class="header-content">
       <div class="logo">CASCADE</div>
       <nav class="breadcrumb-nav">
-        <a href="#heroSection" class="nav-path active" data-label="ROOT">C:/CASCADE/ROOT</a>
-        <a href="#servicesSection" class="nav-path" data-label="BUILD">BUILD</a>
+        <a href="#servicesSection" class="nav-path" data-label="SERVICES">SERVICES</a>
+        <a href="#howItWorks" class="nav-path" data-label="HOW IT WORKS">HOW IT WORKS</a>
         <a href="#pricingSection" class="nav-path" data-label="PRICING">PRICING</a>
+        <a href="#faqSection" class="nav-path" data-label="FAQ">FAQ</a>
       </nav>
       <button class="btn-primary" data-open-modal aria-label="Book a Systems Audit">BOOK AUDIT →</button>
     </div>
@@ -302,7 +302,7 @@
       <div class="section-bg-number">04</div>
       <div class="container">
         <div class="section-header">
-          <p class="section-intro">Numbers don't lie. Manual processes do.</p>
+          <p class="section-intro">Three numbers. Every client hits all of them within 60 days.</p>
         </div>
         
         <div class="results-stats-grid">
@@ -320,9 +320,9 @@
           </div>
         </div>
 
-        <div style="text-align: center; max-width: 800px; margin: 0 auto; position: relative; z-index: 10;">
-          <p style="font-style: italic; opacity: 0.8; font-size: 20px; border-left: 2px solid var(--amber); padding-left: 30px; line-height: 1.6;">"Most agencies talk about AI. We architect it. The difference shows up in your ops within two weeks."</p>
-          <p style="margin-top: 16px; font-size: 12px; letter-spacing: 0.2em; opacity: 0.5;">— OPERATIONS LEAD, SaaS COMPANY (40 EMPLOYEES)</p>
+        <div class="results-quote-container">
+          <p class="results-quote">"Most agencies talk about AI. We architect it. The difference shows up in your ops within two weeks."</p>
+          <p class="results-attribution">— OPERATIONS LEAD, SaaS COMPANY (40 EMPLOYEES)</p>
         </div>
       </div>
     </section>
@@ -367,8 +367,8 @@
       <div class="section-bg-number">06</div>
       <div class="container">
         
-        <div style="text-align: center; margin-bottom: 60px;">
-          <div style="display: inline-block; padding: 4px 12px; background-color: rgba(245, 166, 35, 0.1); border: 1px solid var(--amber); color: var(--amber); font-size: 10px; font-weight: bold; letter-spacing: 0.1em; margin-bottom: 24px;">3 BUILD SLOTS OPEN THIS MONTH</div>
+        <div class="pricing-section-header">
+          <div class="pricing-slot-badge">3 BUILD SLOTS OPEN THIS MONTH</div>
           <h2 style="font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 24px;">SYSTEMS THAT FIT YOUR STAGE</h2>
           <p style="opacity: 0.6; font-size: 14px; max-width: 600px; margin: 0 auto;">Every system is scoped, built, and handed off in a fixed timeline. No retainers required to start.</p>
         </div>
@@ -431,44 +431,44 @@
           <p class="section-intro">Questions are placeholders for hesitation. Here is the clarity you need.</p>
         </div>
 
-        <div style="max-width: 900px;">
-          <div class="faq-item-container" style="padding: 32px 0; border-bottom: 1px solid var(--concrete-gray);">
-            <div class="faq-question-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-              <p style="font-size: 18px; letter-spacing: 0.05em;">What tools do you use?</p>
-              <div class="faq-toggle-icon">+</div>
-            </div>
-            <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
-              <p style="padding-top: 24px; opacity: 0.8; font-size: 14px; line-height: 1.5;">n8n for orchestration, combined with Claude or GPT-4. We integrate with your existing stack via custom APIs.</p>
-            </div>
-          </div>
-
-          <div class="faq-item-container" style="padding: 32px 0; border-bottom: 1px solid var(--concrete-gray);">
-            <div class="faq-question-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-              <p style="font-size: 18px; letter-spacing: 0.05em;">Do I need technical knowledge after handoff?</p>
-              <div class="faq-toggle-icon">+</div>
-            </div>
-            <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
-              <p style="padding-top: 24px; opacity: 0.8; font-size: 14px; line-height: 1.5;">No. We deliver full documentation and video walkthroughs. If you can use a web app, you can own the system.</p>
-            </div>
-          </div>
-
-          <div class="faq-item-container">
+        <div class="faq-grid">
+          <div class="faq-item">
             <div class="faq-question-header">
-              <p>Can you work inside tools I already use?</p>
+              <p class="faq-question-text">What tools do you use?</p>
               <div class="faq-toggle-icon">+</div>
             </div>
             <div class="faq-answer-content">
-              <p>Yes. We integrate with CRMs, email platforms, Slack, Workspace, and anything with an API.</p>
+              <p class="faq-answer-text">n8n for orchestration, combined with Claude or GPT-4. We integrate with your existing stack via custom APIs.</p>
             </div>
           </div>
 
-          <div class="faq-item-container">
+          <div class="faq-item">
             <div class="faq-question-header">
-              <p>What if something breaks after handoff?</p>
+              <p class="faq-question-text">Do I need technical knowledge after handoff?</p>
               <div class="faq-toggle-icon">+</div>
             </div>
             <div class="faq-answer-content">
-              <p>Every project includes a 30-day support window. After that, we offer optional maintenance retainers.</p>
+              <p class="faq-answer-text">No. We deliver full documentation and video walkthroughs. If you can use a web app, you can own the system.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question-header">
+              <p class="faq-question-text">Can you work inside tools I already use?</p>
+              <div class="faq-toggle-icon">+</div>
+            </div>
+            <div class="faq-answer-content">
+              <p class="faq-answer-text">Yes. We integrate with CRMs, email platforms, Slack, Workspace, and anything with an API.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question-header">
+              <p class="faq-question-text">What if something breaks after handoff?</p>
+              <div class="faq-toggle-icon">+</div>
+            </div>
+            <div class="faq-answer-content">
+              <p class="faq-answer-text">Every project includes a 30-day support window. After that, we offer optional maintenance retainers.</p>
             </div>
           </div>
         </div>

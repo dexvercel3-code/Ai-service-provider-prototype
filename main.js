@@ -136,20 +136,6 @@ function initCustomCursor() {
     cursor.style.left = `${e.clientX}px`;
     cursor.style.top = `${e.clientY}px`;
   });
-
-  const interactiveElements = document.querySelectorAll('button, a, .faq-question-header, input, textarea, .flow-node-box');
-  interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '40px';
-      cursor.style.height = '40px';
-      cursor.style.backgroundColor = 'rgba(245, 166, 35, 0.1)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '20px';
-      cursor.style.height = '20px';
-      cursor.style.backgroundColor = 'transparent';
-    });
-  });
 }
 
 // Haptic Pulse on Click
@@ -166,26 +152,6 @@ function initHapticButtons() {
       pulse.style.top = `${y}px`;
       btn.appendChild(pulse);
       setTimeout(() => pulse.remove(), 600);
-    });
-
-    // Button Glitch Effect
-    const originalText = btn.textContent;
-    btn.addEventListener('mouseenter', () => {
-      let iteration = 0;
-      const interval = setInterval(() => {
-        btn.textContent = btn.textContent.split("")
-          .map((char, index) => {
-            if(index < iteration) return originalText[index];
-            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"[Math.floor(Math.random() * 40)];
-          })
-          .join("");
-        
-        if(iteration >= originalText.length) clearInterval(interval);
-        iteration += 1 / 3;
-      }, 30);
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.textContent = originalText;
     });
   });
 }
@@ -214,8 +180,11 @@ function initPipelineTooltips() {
     });
 
     node.addEventListener('mousemove', (e) => {
-      tooltip.style.left = `${e.clientX + 15}px`;
-      tooltip.style.top = `${e.clientY + 15}px`;
+      // Boundary clamp
+      const x = Math.min(e.clientX + 15, window.innerWidth - 220);
+      const y = Math.min(e.clientY + 15, window.innerHeight - 60);
+      tooltip.style.left = `${x}px`;
+      tooltip.style.top = `${y}px`;
     });
 
     node.addEventListener('mouseleave', () => {
@@ -227,10 +196,13 @@ function initPipelineTooltips() {
 // Navigation Breadcrumbs logic
 function initNavBreadcrumbs() {
   const paths = document.querySelectorAll('.nav-path');
+  if (!paths.length) return;
+
   const sections = [
-    { id: 'heroSection', path: 'C:/CASCADE/ROOT' },
-    { id: 'servicesSection', path: 'C:/CASCADE/BUILD' },
-    { id: 'pricingSection', path: 'C:/CASCADE/PRICING' }
+    { id: 'servicesSection', label: 'SERVICES' },
+    { id: 'howItWorks', label: 'HOW IT WORKS' },
+    { id: 'pricingSection', label: 'PRICING' },
+    { id: 'faqSection', label: 'FAQ' }
   ];
 
   const handleScroll = () => {
@@ -244,18 +216,10 @@ function initNavBreadcrumbs() {
 
     paths.forEach(path => {
       const target = path.getAttribute('href').replace('#', '');
-      const config = sections.find(s => s.id === target);
-      
       if (target === currentId) {
         path.classList.add('active');
-        if (config) {
-          if (target === 'heroSection') path.textContent = 'C:/CASCADE/ROOT';
-          else if (target === 'servicesSection') path.textContent = 'root.dispatch(services)';
-          else if (target === 'pricingSection') path.textContent = 'api.fetch(pricing)';
-        }
       } else {
         path.classList.remove('active');
-        path.textContent = path.getAttribute('data-label');
       }
     });
   };
@@ -397,7 +361,7 @@ function initScrollReveal() {
   }, observerOptions);
 
   const targets = document.querySelectorAll(
-    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item-container, .stat-item'
+    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item, .stat-item'
   );
 
   targets.forEach(el => revealObserver.observe(el));

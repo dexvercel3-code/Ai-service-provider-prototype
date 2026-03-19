@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404: SYSTEM_ERROR — Cascade Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      margin: 0;
+      padding: 0 40px;
+    }
+    .error-code {
+      font-size: clamp(8rem, 20vw, 15rem);
+      font-family: 'Barlow Condensed', sans-serif;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .error-message {
+      font-size: 18px;
+      opacity: 0.6;
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+    .btn-secondary {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-wrapper"></div>
+  <div class="crt-overlay"></div>
+
+  <div class="error-code">404</div>
+  <h1 style="color: var(--warm-white); margin-bottom: 16px; letter-spacing: 0.1em;">FILE_NOT_FOUND</h1>
+  <p class="error-message">The process or resource you are looking for has been moved, archived, or never existed in the current manifest.</p>
+  
+  <a href="/" class="btn-primary">RETURN TO ROOT →</a>
+
+  <div style="margin-top: 80px; font-size: 10px; opacity: 0.3; letter-spacing: 0.2em; font-family: 'IBM Plex Mono';">
+    STATUS: DISCONNECTED | ERROR: 0x800404
+  </div>
+</body>
+</html>
