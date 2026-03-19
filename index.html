@@ -48,6 +48,8 @@
 <body>
   <!-- Performance: Noise stays fixed on wrapper -->
   <div class="noise-wrapper"></div>
+  <div class="crt-overlay"></div>
+  <div class="data-background-pipe" aria-hidden="true"></div>
 
   <!-- Progress Indicators -->
   <div id="scroll-progress-line"></div>
@@ -57,6 +59,11 @@
   <header id="mainHeader">
     <div class="header-content">
       <div class="logo">CASCADE</div>
+      <nav class="breadcrumb-nav">
+        <a href="#heroSection" class="nav-path active" data-label="ROOT">C:/CASCADE/ROOT</a>
+        <a href="#servicesSection" class="nav-path" data-label="BUILD">BUILD</a>
+        <a href="#pricingSection" class="nav-path" data-label="PRICING">PRICING</a>
+      </nav>
       <button class="btn-primary" data-open-modal aria-label="Book a Systems Audit">BOOK AUDIT →</button>
     </div>
   </header>
@@ -97,22 +104,22 @@
         </div>
 
         <div class="services-grid">
-          <div class="service-card">
+          <div class="service-card" data-spec="REF. CS-101A">
             <span class="service-tag">[→]</span>
             <h3>CONTENT AUTOMATION</h3>
             <p>AI pipelines that research, write, format, and publish content across channels — on schedule, without a team.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card" data-spec="REF. CS-202B">
             <span class="service-tag">[→]</span>
             <h3>LEAD GENERATION SYSTEMS</h3>
             <p>Automated prospecting workflows that find, qualify, and route leads into your CRM before you wake up.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card" data-spec="REF. CS-303C">
             <span class="service-tag">[→]</span>
             <h3>CLIENT DELIVERY PIPELINES</h3>
             <p>End-to-end workflows that handle onboarding, reporting, and communication for your client base at scale.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card" data-spec="REF. CS-404D">
             <span class="service-tag">[→]</span>
             <h3>AI INFRASTRUCTURE</h3>
             <p>The backbone: API orchestration, model routing, data pipelines, and automation architecture built to handle real production load.</p>

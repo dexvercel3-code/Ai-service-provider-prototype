@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initFooterNav();
   initScrollTo();
   initFlowchart();
+  initHapticButtons();
+  initPipelineTooltips();
+  initNavBreadcrumbs();
 });
 
 function initFlowchart() {
@@ -134,7 +137,7 @@ function initCustomCursor() {
     cursor.style.top = `${e.clientY}px`;
   });
 
-  const interactiveElements = document.querySelectorAll('button, a, .faq-question-header, input, textarea');
+  const interactiveElements = document.querySelectorAll('button, a, .faq-question-header, input, textarea, .flow-node-box');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.width = '40px';
@@ -147,6 +150,118 @@ function initCustomCursor() {
       cursor.style.backgroundColor = 'transparent';
     });
   });
+}
+
+// Haptic Pulse on Click
+function initHapticButtons() {
+  const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+  buttons.forEach(btn => {
+    btn.addEventListener('mousedown', (e) => {
+      const pulse = document.createElement('div');
+      pulse.className = 'btn-pulse';
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      pulse.style.left = `${x}px`;
+      pulse.style.top = `${y}px`;
+      btn.appendChild(pulse);
+      setTimeout(() => pulse.remove(), 600);
+    });
+
+    // Button Glitch Effect
+    const originalText = btn.textContent;
+    btn.addEventListener('mouseenter', () => {
+      let iteration = 0;
+      const interval = setInterval(() => {
+        btn.textContent = btn.textContent.split("")
+          .map((char, index) => {
+            if(index < iteration) return originalText[index];
+            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"[Math.floor(Math.random() * 40)];
+          })
+          .join("");
+        
+        if(iteration >= originalText.length) clearInterval(interval);
+        iteration += 1 / 3;
+      }, 30);
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.textContent = originalText;
+    });
+  });
+}
+
+// Pipeline Tooltips
+function initPipelineTooltips() {
+  const tooltip = document.createElement('div');
+  tooltip.className = 'pipe-tooltip';
+  document.body.appendChild(tooltip);
+
+  const nodeData = {
+    'flow-node-1': 'STATUS: HANDSHAKE_OK | LATENCY: 12ms',
+    'flow-node-2': 'INTENT: CLASSIFIED_HIGH | TOKENS: 412',
+    'flow-node-3': 'CRM: SYNCED | TARGET: HUBSPOT',
+    'flow-node-4': 'MAIL: DISPATCHED | TEMPLATE: v2.4'
+  };
+
+  const nodes = document.querySelectorAll('.flow-node');
+  nodes.forEach(node => {
+    node.addEventListener('mouseenter', (e) => {
+      const info = nodeData[node.id];
+      if (info) {
+        tooltip.textContent = info;
+        tooltip.classList.add('visible');
+      }
+    });
+
+    node.addEventListener('mousemove', (e) => {
+      tooltip.style.left = `${e.clientX + 15}px`;
+      tooltip.style.top = `${e.clientY + 15}px`;
+    });
+
+    node.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('visible');
+    });
+  });
+}
+
+// Navigation Breadcrumbs logic
+function initNavBreadcrumbs() {
+  const paths = document.querySelectorAll('.nav-path');
+  const sections = [
+    { id: 'heroSection', path: 'C:/CASCADE/ROOT' },
+    { id: 'servicesSection', path: 'C:/CASCADE/BUILD' },
+    { id: 'pricingSection', path: 'C:/CASCADE/PRICING' }
+  ];
+
+  const handleScroll = () => {
+    let currentId = '';
+    sections.forEach(s => {
+      const section = document.getElementById(s.id);
+      if (section && window.scrollY >= section.offsetTop - 300) {
+        currentId = s.id;
+      }
+    });
+
+    paths.forEach(path => {
+      const target = path.getAttribute('href').replace('#', '');
+      const config = sections.find(s => s.id === target);
+      
+      if (target === currentId) {
+        path.classList.add('active');
+        if (config) {
+          if (target === 'heroSection') path.textContent = 'C:/CASCADE/ROOT';
+          else if (target === 'servicesSection') path.textContent = 'root.dispatch(services)';
+          else if (target === 'pricingSection') path.textContent = 'api.fetch(pricing)';
+        }
+      } else {
+        path.classList.remove('active');
+        path.textContent = path.getAttribute('data-label');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Initial call
 }
 
 // Typewriter Animation
@@ -188,10 +303,13 @@ function initTypewriter() {
       charIndex++;
       setTimeout(type, 30);
     } else {
-      activeLine.classList.remove('active-line');
-      lineIndex++;
-      charIndex = 0;
-      setTimeout(type, 600);
+      // Keep active-line class for the cursor to stay active until next line or end
+      setTimeout(() => {
+        activeLine.classList.remove('active-line');
+        lineIndex++;
+        charIndex = 0;
+        type();
+      }, 600);
     }
   }
 
@@ -280,11 +398,11 @@ function initScrollReveal() {
 
   // Add reveal class to elements for scroll entrance
   const elementsToReveal = document.querySelectorAll(
-    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item-container, .stat-item'
+    '.service-card, .timeline-step, .pricing-tier, .who-list-container, .faq-item-container, .stat-item, section'
   );
   
   elementsToReveal.forEach(el => {
-    el.classList.add('reveal');
+    el.classList.add('reveal-wipe');
     revealObserver.observe(el);
   });
 }
