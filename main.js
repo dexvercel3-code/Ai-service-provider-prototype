@@ -14,7 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initTimeline();
   initMobileCTA();
   initFooterNav();
+  initScrollTo();
 });
+
+// Scroll to Section
+function initScrollTo() {
+  const scrollButtons = document.querySelectorAll('[data-scroll-to]');
+  scrollButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-scroll-to');
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+}
 
 // Scroll Progress Line
 function initScrollProgress() {

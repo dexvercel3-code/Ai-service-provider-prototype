@@ -484,6 +484,80 @@ header.visible {
   opacity: 0.7;
 }
 
+/* Social Proof Marquee */
+.social-proof-marquee {
+  overflow: hidden;
+  padding: 60px 0;
+  background-color: #080808;
+  border-bottom: 1px solid var(--concrete-gray);
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 60px;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+  width: max-content;
+}
+
+.marquee-item-group {
+  display: flex;
+  gap: 60px;
+}
+
+.marquee-text {
+  font-size: 14px;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Who Section Lists */
+.who-list {
+  list-style: none;
+}
+
+.who-list li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--concrete-gray);
+  font-size: 14px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.who-list li::before {
+  content: '✓';
+  color: var(--amber);
+  font-weight: bold;
+}
+
+.not-for-list li::before {
+  content: '✕' !important;
+  color: var(--error-red) !important;
+}
+
+.who-list-title {
+  margin-bottom: 32px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.who-list-title.for {
+  color: var(--amber);
+}
+
+.who-list-title.not-for {
+  color: var(--error-red);
+}
+
 /* Timeline */
 .how-it-works {
   padding: var(--spacing-section) 40px;
@@ -638,6 +712,36 @@ header.visible {
 .faq-section {
   padding: var(--spacing-section) 40px;
   position: relative;
+}
+
+.faq-item-container {
+  padding: 32px 0;
+  border-bottom: 1px solid var(--concrete-gray);
+}
+
+.faq-question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-question-header p {
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.faq-answer-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s var(--ease-smooth);
+}
+
+.faq-answer-content p {
+  padding-top: 24px;
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .faq-toggle-icon {

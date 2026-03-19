@@ -10,11 +10,13 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://cascadesystems.example.com" />
 
-  <!-- Preload Fonts for Performance -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  </noscript>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/style.css">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -72,7 +74,7 @@
         <p class="hero-subheadline">We architect AI automation systems and intelligent infrastructure that remove the manual layer from your operations — permanently.</p>
 
         <div class="hero-buttons">
-          <button class="btn-primary" onclick="document.getElementById('servicesSection').scrollIntoView({ behavior: 'smooth' })">SEE WHAT WE AUTOMATE →</button>
+          <button class="btn-primary" data-scroll-to="servicesSection">SEE WHAT WE AUTOMATE →</button>
           <button class="btn-secondary" data-open-modal>BOOK A SYSTEMS AUDIT</button>
         </div>
       </div>
@@ -174,40 +176,38 @@
 
     <div class="section-separator" aria-hidden="true"></div>
 
-    <!-- Section 04: Social Proof Marquee (NEW) -->
-    <section style="overflow: hidden; padding: 60px 0; background-color: #080808; border-bottom: 1px solid var(--concrete-gray);">
-      <div style="display: flex; gap: 60px; white-space: nowrap; animation: marquee 30s linear infinite;">
+    <!-- Section 04: Social Proof Marquee -->
+    <section class="social-proof-marquee">
+      <div class="marquee-content">
         <!-- Testimonials -->
-        <div style="display: flex; gap: 60px;">
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"CASCADE ELIMINATED 40 HOURS OF OPS PER WEEK" — ADRIAN @ TELOS</p>
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"THE ONLY AI AGENCY THAT ACTUALLY SHIPS CODE" — SARAH @ NEXUS</p>
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"REPLACED 3 DATA VAs WITH ONE n8n WORKFLOW" — MARCUS @ SCALE</p>
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"ROI WAS EVIDENT WITHIN 7 DAYS OF KICKOFF" — JESSICA @ FLOW</p>
+        <div class="marquee-item-group">
+          <p class="marquee-text">"CASCADE ELIMINATED 40 HOURS OF OPS PER WEEK" — ADRIAN @ TELOS</p>
+          <p class="marquee-text">"THE ONLY AI AGENCY THAT ACTUALLY SHIPS CODE" — SARAH @ NEXUS</p>
+          <p class="marquee-text">"REPLACED 3 DATA VAs WITH ONE n8n WORKFLOW" — MARCUS @ SCALE</p>
+          <p class="marquee-text">"ROI WAS EVIDENT WITHIN 7 DAYS OF KICKOFF" — JESSICA @ FLOW</p>
         </div>
         <!-- Duplicate for loop -->
-        <div style="display: flex; gap: 60px;">
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"CASCADE ELIMINATED 40 HOURS OF OPS PER WEEK" — ADRIAN @ TELOS</p>
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"THE ONLY AI AGENCY THAT ACTUALLY SHIPS CODE" — SARAH @ NEXUS</p>
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"REPLACED 3 DATA VAs WITH ONE n8n WORKFLOW" — MARCUS @ SCALE</p>
-          <p style="font-size: 14px; color: var(--amber); letter-spacing: 0.1em; opacity: 0.8;">"ROI WAS EVIDENT WITHIN 7 DAYS OF KICKOFF" — JESSICA @ FLOW</p>
+        <div class="marquee-item-group">
+          <p class="marquee-text">"CASCADE ELIMINATED 40 HOURS OF OPS PER WEEK" — ADRIAN @ TELOS</p>
+          <p class="marquee-text">"THE ONLY AI AGENCY THAT ACTUALLY SHIPS CODE" — SARAH @ NEXUS</p>
+          <p class="marquee-text">"REPLACED 3 DATA VAs WITH ONE n8n WORKFLOW" — MARCUS @ SCALE</p>
+          <p class="marquee-text">"ROI WAS EVIDENT WITHIN 7 DAYS OF KICKOFF" — JESSICA @ FLOW</p>
         </div>
       </div>
-      <style>
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      </style>
     </section>
 
     <!-- Section 05: Results -->
-    <section class="results-section" id="resultsSection" style="padding-top: 120px;">
+    <section class="results-section" id="resultsSection">
       <div class="section-bg-number">04</div>
       <div class="container">
+        <div class="section-header">
+          <p class="section-intro">Numbers don't lie. Manual processes do.</p>
+        </div>
+        
         <div class="results-stats-grid">
           <div class="stat-item">
             <div class="stat-counter" data-target="847" data-suffix=" hrs">0 hrs</div>
-            <p class="stat-description">Numbers don't lie. Manual processes do.</p>
+            <p class="stat-description">Hours eliminated per month.</p>
           </div>
           <div class="stat-item">
             <div class="stat-counter" data-target="14" data-suffix=" days">0 days</div>
@@ -238,21 +238,21 @@
 
         <div class="who-grid-two">
           <div class="who-list-container">
-            <h3 style="color: var(--amber); margin-bottom: 32px; font-size: 14px;">WHO THIS IS FOR</h3>
-            <ul style="list-style: none;">
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Founders who've outgrown manual processes</li>
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Operators running content or lead gen at scale</li>
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Teams that want true integration, not just another tool</li>
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--amber);">✓</span> Businesses paying contractors for repetitive work</li>
+            <h3 class="who-list-title for">WHO THIS IS FOR</h3>
+            <ul class="who-list">
+              <li>Founders who've outgrown manual processes</li>
+              <li>Operators running content or lead gen at scale</li>
+              <li>Teams that want true integration, not just another tool</li>
+              <li>Businesses paying contractors for repetitive work</li>
             </ul>
           </div>
           <div class="who-list-container">
-            <h3 style="color: var(--error-red); margin-bottom: 32px; font-size: 14px;">WHO THIS IS NOT FOR</h3>
-            <ul style="list-style: none;">
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Companies that want a chatbot demo or pitch deck</li>
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Teams evaluating AI for months before committing</li>
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Anyone looking for the cheapest possible implementation</li>
-              <li style="padding: 16px 0; border-bottom: 1px solid var(--concrete-gray); font-size: 14px; display: flex; gap: 12px;"><span style="color: var(--error-red);">✕</span> Organizations without clear manual processes</li>
+            <h3 class="who-list-title not-for">WHO THIS IS NOT FOR</h3>
+            <ul class="who-list not-for-list">
+              <li>Companies that want a chatbot demo or pitch deck</li>
+              <li>Teams evaluating AI for months before committing</li>
+              <li>Anyone looking for the cheapest possible implementation</li>
+              <li>Organizations without clear manual processes</li>
             </ul>
           </div>
         </div>
@@ -351,13 +351,23 @@
             </div>
           </div>
 
-          <div class="faq-item-container" style="padding: 32px 0; border-bottom: 1px solid var(--concrete-gray);">
-            <div class="faq-question-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-              <p style="font-size: 18px; letter-spacing: 0.05em;">How long does a typical project take?</p>
+          <div class="faq-item-container">
+            <div class="faq-question-header">
+              <p>Can you work inside tools I already use?</p>
               <div class="faq-toggle-icon">+</div>
             </div>
-            <div class="faq-answer-content" style="max-height: 0; overflow: hidden; transition: all 0.4s var(--ease-smooth);">
-              <p style="padding-top: 24px; opacity: 0.8; font-size: 14px; line-height: 1.5;">Starter pipelines ship in 7 days. custom infrastructure takes 14–21 days. Fixed timelines, zero drift.</p>
+            <div class="faq-answer-content">
+              <p>Yes. We integrate with CRMs, email platforms, Slack, Workspace, and anything with an API.</p>
+            </div>
+          </div>
+
+          <div class="faq-item-container">
+            <div class="faq-question-header">
+              <p>What if something breaks after handoff?</p>
+              <div class="faq-toggle-icon">+</div>
+            </div>
+            <div class="faq-answer-content">
+              <p>Every project includes a 30-day support window. After that, we offer optional maintenance retainers.</p>
             </div>
           </div>
         </div>
